@@ -1,0 +1,25 @@
+group = "com.adaptc.mws"
+archivesBaseName = "plugins-testing"
+
+apply plugin:'groovy'
+
+dependencies {
+	groovy localGroovy()
+	compile 'junit:junit:4.8.1'
+	compile 'commons-lang:commons-lang:2.6'
+	compile "org.springframework:spring-core:${rootProject.'version.spring'}"
+	compile project(":commons")
+}
+
+eclipse {
+	project {
+		comment = 'MWS Plugins Commons Testing'
+	}
+}
+
+// Customize the POM file for dependency
+[uploadArchives.repositories.mavenDeployer]*.pom*.whenConfigured {pom ->
+	def dependency = pom.dependencies.find { it.artifactId == 'plugins-commons' }
+	dependency.groupId = "com.adaptc.mws"
+	dependency.artifactId = "plugins-commons"
+}

@@ -1,0 +1,17 @@
+group = "com.adaptc.mws"
+archivesBaseName = "plugins-commons"
+
+dependencies {
+	compile "commons-logging:commons-logging:1.1.1"
+	compile ("org.springframework:spring-context:${rootProject.'version.spring'}") {
+		transitive = false
+	}
+	compile ("org.springframework:spring-test:${rootProject.'version.spring'}") {
+		transitive = false
+	}
+	compile "javax.servlet:servlet-api:2.4"
+	
+	compile 'org.codehaus.groovy:groovy:1.8.6'
+	compile group:'net.sf.json-lib', name:'json-lib', version:'2.4', classifier:'jdk15'
+	compile 'ca.juliusdavies:not-yet-commons-ssl:0.3.11'
+}

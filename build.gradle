@@ -1,0 +1,109 @@
+apply plugin:'idea'
+
+subprojects { proj ->
+	apply plugin:'java'
+	apply plugin:'maven'
+	apply plugin:'eclipse'
+	apply plugin:'idea'
+
+	configurations {
+		deployerJars
+	}
+	
+	configurations.all {
+		// check for updates every build
+		resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+	}
+	
+	repositories {
+		mavenCentral()
+	}
+	
+	dependencies {
+		deployerJars "org.apache.maven.wagon:wagon-http:1.0-beta-2"
+		testCompile ("org.spockframework:spock-core:0.7-groovy-1.8") {
+			exclude module:"groovy-all"
+		}
+	}
+	
+	sourceCompatibility = "1.6"
+	targetCompatibility = "1.6"
+	if (proj.name=="commons" || proj.name=="testing")
+		proj.version = rootProject.'commons.version'
+
+	manifest.mainAttributes(
+			"Built-By": System.properties['user.name'],
+			"Created-By": System.properties['java.vm.version'] + " (" + System.properties['java.vm.vendor'] + ")",
+			"Implementation-Title": "Adaptive Computing Plugins Commons - "+proj.archivesBaseName,
+			"Implementation-Version": proj.version,
+			"Implementation-Vendor": 'adaptivecomputing.com')
+	
+	task sourcesJar(type: Jar) {
+		classifier = 'sources'
+		from sourceSets.main.allSource
+	}
+
+	task javadocJar(type: Jar, dependsOn:javadoc) {
+		classifier = 'javadoc'
+		from javadoc.destinationDir
+	}
+	
+	artifacts {
+		archives jar
+		archives sourcesJar
+		archives javadocJar
+	}
+
+	uploadArchives {
+		def repo = rootProject.version.contains("-SNAPSHOT") ? "snapshots" : "releases"
+		def repoUrl = rootProject."${repo}.url"
+		def username = rootProject."${repo}.username"
+		def password = rootProject."${repo}.password"
+
+		repositories.mavenDeployer {
+			configuration = configurations.deployerJars
+			repository(url:repoUrl) {
+				authentication(userName:username, password:password)
+			}
+
+			pom {
+				project {
+					name proj.projectName
+					description proj.projectDescription
+					licenses {
+						license {
+							name "The Apache Software License, Version 2.0"
+							url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+							distribution "repo"
+						}
+					}
+					url "http://github.com/adaptivecomputing/plugins-commons"
+					scm {
+						connection "scm:git:https://github.com/adaptivecomputing/plugins-commons.git"
+						url "http://github.com/adaptivecomputing/plugins-commons"
+					}
+					developers {
+						developer {
+							id "bsaville"
+							name "Brian Saville"
+							email "bsaville@adaptivecomputing.com"
+							url "http://adaptivecomputing.com"
+							organization = "Adaptive Computing, Inc."
+							organizationUrl "http://adaptivecomputing.com"
+							roles {
+								role "architect"
+								role "developer"
+							}
+							timezone "-7"
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '1.3'
+	jarFile = 'wrapper/wrapper.jar'
+}
