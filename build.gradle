@@ -55,7 +55,7 @@ subprojects { proj ->
 	}
 
 	uploadArchives {
-		def repo = rootProject.version.contains("-SNAPSHOT") ? "snapshots" : "releases"
+		def repo = "oss-" + (proj.version.contains("-SNAPSHOT") ? "snapshots" : "releases")
 		def repoUrl = rootProject."${repo}.url"
 		def username = rootProject."${repo}.username"
 		def password = rootProject."${repo}.password"
@@ -80,6 +80,7 @@ subprojects { proj ->
 					url "http://github.com/adaptivecomputing/plugins-commons"
 					scm {
 						connection "scm:git:https://github.com/adaptivecomputing/plugins-commons.git"
+						developerConnection "scm:git:https://github.com/adaptivecomputing/plugins-commons.git"
 						url "http://github.com/adaptivecomputing/plugins-commons"
 					}
 					developers {
