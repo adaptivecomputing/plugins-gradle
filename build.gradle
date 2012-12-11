@@ -3,6 +3,7 @@ apply plugin:'idea'
 subprojects { proj ->
 	apply plugin:'java'
 	apply plugin:'maven'
+	apply plugin:'signing'
 	apply plugin:'eclipse'
 	apply plugin:'idea'
 
@@ -54,13 +55,23 @@ subprojects { proj ->
 		archives javadocJar
 	}
 
+	signing {
+		sign configurations.archives
+	}
+
+	def isSnapshot = proj.version.contains("-SNAPSHOT")
+
 	uploadArchives {
-		def repo = "oss-" + (proj.version.contains("-SNAPSHOT") ? "snapshots" : "releases")
+		def repo = "oss-" + (isSnapshot ? "snapshots" : "releases")
 		def repoUrl = rootProject."${repo}.url"
 		def username = rootProject."${repo}.username"
 		def password = rootProject."${repo}.password"
 
 		repositories.mavenDeployer {
+			if (isSnapshot) {
+				beforeDeployment { deployment -> signPom(deployment) }
+			}
+
 			configuration = configurations.deployerJars
 			repository(url:repoUrl) {
 				authentication(userName:username, password:password)
@@ -88,13 +99,8 @@ subprojects { proj ->
 							id "bsaville"
 							name "Brian Saville"
 							email "bsaville@adaptivecomputing.com"
-							url "http://adaptivecomputing.com"
 							organization = "Adaptive Computing, Inc."
 							organizationUrl "http://adaptivecomputing.com"
-							roles {
-								role "architect"
-								role "developer"
-							}
 							timezone "-7"
 						}
 					}
