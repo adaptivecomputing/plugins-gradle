@@ -68,7 +68,7 @@ subprojects { proj ->
 		def password = rootProject."${repo}.password"
 
 		repositories.mavenDeployer {
-			if (isSnapshot) {
+			if (!isSnapshot) {
 				beforeDeployment { deployment -> signPom(deployment) }
 			}
 
