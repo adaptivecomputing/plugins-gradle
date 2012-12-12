@@ -187,11 +187,7 @@ enum JobReportFlag {
 	/**
 	 * Cancel job array on a specific exit code
 	 */
-	CANCELONEXITCODE,
-	/**
-	 * VM job cannot be migrated.
-	 */
-	NOVMMIGRATE;
+	CANCELONEXITCODE;
 
 	/**
 	 * Attempts to parse a string and convert it into a corresponding

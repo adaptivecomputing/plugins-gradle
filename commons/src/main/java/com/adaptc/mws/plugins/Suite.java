@@ -2,11 +2,10 @@ package com.adaptc.mws.plugins;
 
 /**
  * This enum represents which suite or context Moab Web Services is running in -
- * HPC, Cloud, or HP CSA.
+ * HPC or Cloud.
  * @author bsaville
  */
 public enum Suite {
-	HP_CSA("HP CSA"),
 	HPC("HPC"),
 	CLOUD("Cloud");
 	
@@ -22,8 +21,8 @@ public enum Suite {
 	}
 
 	/**
-	 * Returns the suite in a human-readable string, such as "Cloud" for {@link #CLOUD} and "HP CSA" for
-	 * {@link #HP_CSA}.
+	 * Returns the suite in a human-readable string, such as "Cloud" for {@link #CLOUD} and "HPC" for
+	 * {@link #HPC}.
 	 * @return A human-readable string
 	 */
 	public String toString() {
