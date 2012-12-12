@@ -1,8 +1,7 @@
 package com.adaptc.mws.plugins;
 
 /**
- * This enum represents which suite or context Moab Web Services is running in -
- * HPC, Cloud, or HP CSA.
+ * This enumeration represents which suite or context Moab Web Services is running in.
  * @author bsaville
  */
 public enum Suite {
