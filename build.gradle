@@ -42,8 +42,6 @@ subprojects { proj ->
 
 	sourceCompatibility = "1.6"
 	targetCompatibility = "1.6"
-	if (proj.name=="commons" || proj.name=="testing")
-		proj.version = rootProject.'commons.version'
 
 	manifest.mainAttributes(
 			"Built-By": System.properties['user.name'],
@@ -101,11 +99,11 @@ subprojects { proj ->
 							distribution "repo"
 						}
 					}
-					url "http://github.com/adaptivecomputing/plugins-commons"
+					url "http://github.com/adaptivecomputing/plugins-gradle"
 					scm {
-						connection "scm:git:https://github.com/adaptivecomputing/plugins-commons.git"
-						developerConnection "scm:git:https://github.com/adaptivecomputing/plugins-commons.git"
-						url "http://github.com/adaptivecomputing/plugins-commons"
+						connection "scm:git:https://github.com/adaptivecomputing/plugins-gradle.git"
+						developerConnection "scm:git:https://github.com/adaptivecomputing/plugins-gradle.git"
+						url "http://github.com/adaptivecomputing/plugins-gradle"
 					}
 					developers {
 						developer {

@@ -1,0 +1,4 @@
+archivesBaseName = "lib-dir"
+
+dependencies {
+}

@@ -1,1 +1,4 @@
-include 'moab-sdk'
+include 'moab-sdk',
+		'fat-jar',
+		'lib-dir',
+		'cobertura-master'
