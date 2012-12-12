@@ -5,14 +5,18 @@ package com.adaptc.mws.plugins;
  * @author bsaville
  */
 public enum Suite {
+	/**
+	 * No suite configured.  Note: this should not be used in production.
+	 */
+	BASE("Base"),
 	HP_CSA("HP CSA"),
 	HPC("HPC"),
 	CLOUD("Cloud");
 	
 	/**
-	 * The default suite for MWS.  This is equivalent to {@link #CLOUD}.
+	 * The default suite for MWS.  This is equivalent to {@link #BASE}.
 	 */
-	public static final Suite DEFAULT_SUITE = Suite.CLOUD;
+	public static final Suite DEFAULT_SUITE = Suite.BASE;
 	
 	private String str;
 	
