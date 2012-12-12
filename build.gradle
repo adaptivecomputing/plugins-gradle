@@ -30,14 +30,6 @@ subprojects { proj ->
 		}
 		compile gradleApi()
 		groovy localGroovy()
-		compile ('org.codehaus.groovy.modules.http-builder:http-builder:0.5.2') {
-			exclude group:'org.codehaus.groovy', module:'groovy'
-		}
-		compile 'com.mapvine:gradle-cobertura-plugin:1.0'
-		compile 'commons-lang:commons-lang:2.6'
-		runtime 'commons-collections:commons-collections:3.2.1'
-		runtime 'commons-beanutils:commons-beanutils:1.8.3'
-		runtime 'net.sf.ezmorph:ezmorph:1.0.6'
 	}
 
 	sourceCompatibility = "1.6"
@@ -46,7 +38,7 @@ subprojects { proj ->
 	manifest.mainAttributes(
 			"Built-By": System.properties['user.name'],
 			"Created-By": System.properties['java.vm.version'] + " (" + System.properties['java.vm.vendor'] + ")",
-			"Implementation-Title": "Adaptive Computing Plugins Commons - "+proj.archivesBaseName,
+			"Implementation-Title": "Adaptive Computing Gradle Plugins - "+proj.archivesBaseName,
 			"Implementation-Version": proj.version,
 			"Implementation-Vendor": 'adaptivecomputing.com')
 

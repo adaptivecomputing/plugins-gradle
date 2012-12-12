@@ -1,4 +1,5 @@
 archivesBaseName = "cobertura-master"
 
 dependencies {
+	compile 'com.mapvine:gradle-cobertura-plugin:1.0'
 }

@@ -1,4 +1,11 @@
 archivesBaseName = "moab-sdk"
 
 dependencies {
+	compile ('org.codehaus.groovy.modules.http-builder:http-builder:0.5.2') {
+		exclude group:'org.codehaus.groovy', module:'groovy'
+	}
+	compile 'commons-lang:commons-lang:2.6'
+	runtime 'commons-collections:commons-collections:3.2.1'
+	runtime 'commons-beanutils:commons-beanutils:1.8.3'
+	runtime 'net.sf.ezmorph:ezmorph:1.0.6'
 }
