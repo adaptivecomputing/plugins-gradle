@@ -1,8 +1,8 @@
-group = "com.adaptc.gradle"
-
 apply plugin:'idea'
 
 subprojects { proj ->
+	group = "com.adaptc.gradle"
+
 	apply plugin:'java'
 	apply plugin:'groovy'
 	apply plugin:'maven'

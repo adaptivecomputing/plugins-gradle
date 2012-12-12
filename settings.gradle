@@ -1,3 +1,1 @@
-include 'commons',
-		'testing',
-		'moab-sdk'
+include 'moab-sdk'
