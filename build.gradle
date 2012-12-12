@@ -1,7 +1,10 @@
+group = "com.adaptc.gradle"
+
 apply plugin:'idea'
 
 subprojects { proj ->
 	apply plugin:'java'
+	apply plugin:'groovy'
 	apply plugin:'maven'
 	apply plugin:'signing'
 	apply plugin:'eclipse'
@@ -10,23 +13,33 @@ subprojects { proj ->
 	configurations {
 		deployerJars
 	}
-	
+
 	configurations.all {
 		// check for updates every build
 		resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
 	}
-	
+
 	repositories {
 		mavenCentral()
 	}
-	
+
 	dependencies {
 		deployerJars "org.apache.maven.wagon:wagon-http:1.0-beta-2"
 		testCompile ("org.spockframework:spock-core:0.7-groovy-1.8") {
 			exclude module:"groovy-all"
 		}
+		compile gradleApi()
+		groovy localGroovy()
+		compile ('org.codehaus.groovy.modules.http-builder:http-builder:0.5.2') {
+			exclude group:'org.codehaus.groovy', module:'groovy'
+		}
+		compile 'com.mapvine:gradle-cobertura-plugin:1.0'
+		compile 'commons-lang:commons-lang:2.6'
+		runtime 'commons-collections:commons-collections:3.2.1'
+		runtime 'commons-beanutils:commons-beanutils:1.8.3'
+		runtime 'net.sf.ezmorph:ezmorph:1.0.6'
 	}
-	
+
 	sourceCompatibility = "1.6"
 	targetCompatibility = "1.6"
 	if (proj.name=="commons" || proj.name=="testing")
@@ -38,7 +51,7 @@ subprojects { proj ->
 			"Implementation-Title": "Adaptive Computing Plugins Commons - "+proj.archivesBaseName,
 			"Implementation-Version": proj.version,
 			"Implementation-Vendor": 'adaptivecomputing.com')
-	
+
 	task sourcesJar(type: Jar) {
 		classifier = 'sources'
 		from sourceSets.main.allSource
@@ -48,7 +61,7 @@ subprojects { proj ->
 		classifier = 'javadoc'
 		from javadoc.destinationDir
 	}
-	
+
 	artifacts {
 		archives jar
 		archives sourcesJar
