@@ -58,11 +58,12 @@ subprojects { proj ->
 		archives javadocJar
 	}
 
-	signing {
-		sign configurations.archives
-	}
-
 	def isSnapshot = proj.version.contains("-SNAPSHOT")
+
+	signing {
+		if (!isSnapshot)
+			sign configurations.archives
+	}
 
 	uploadArchives {
 		def repo = "oss-" + (isSnapshot ? "snapshots" : "releases")
