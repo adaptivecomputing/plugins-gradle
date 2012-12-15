@@ -1,4 +1,4 @@
-package com.adaptc.gradle.moabsdk.mws
+package com.adaptc.gradle.moabsdk.plugins.mws
 
 import org.gradle.api.*
 

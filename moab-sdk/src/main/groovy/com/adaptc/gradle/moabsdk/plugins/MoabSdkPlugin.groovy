@@ -1,14 +1,15 @@
-package com.adaptc.gradle.moabsdk.mws
+package com.adaptc.gradle.moabsdk.plugins
 
 import org.gradle.api.*
 import static com.adaptc.gradle.moabsdk.utils.MoabSdkConstants.*
 import com.adaptc.gradle.moabsdk.tasks.GenerateMWSProjectTask
 import com.adaptc.gradle.moabsdk.utils.MoabSdkUtils
+import com.adaptc.gradle.moabsdk.plugins.mws.MWSProjectInitPlugin
 
 /**
  * @author bsaville
  */
-public class MWSPlugin implements Plugin<Project> {
+public class MoabSdkPlugin implements Plugin<Project> {
 	void apply(Project project) {
 		def createProject = project.tasks.add("createMwsProject", GenerateMWSProjectTask)
 		createProject.setGroup(MOAB_SDK_TASK_GROUP)
