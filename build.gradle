@@ -73,7 +73,7 @@ subprojects { proj ->
 
 		repositories.mavenDeployer {
 			if (!isSnapshot) {
-				beforeDeployment { deployment -> signPom(deployment) }
+				beforeDeployment { deployment -> signing.signPom(deployment) }
 			}
 
 			configuration = configurations.deployerJars
