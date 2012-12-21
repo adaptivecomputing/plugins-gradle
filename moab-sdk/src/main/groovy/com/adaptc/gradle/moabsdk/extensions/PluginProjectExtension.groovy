@@ -6,6 +6,7 @@ package com.adaptc.gradle.moabsdk.extensions
  */
 class PluginProjectExtension {
 	String title
+	String description
 	String author
 
 	File projectFile

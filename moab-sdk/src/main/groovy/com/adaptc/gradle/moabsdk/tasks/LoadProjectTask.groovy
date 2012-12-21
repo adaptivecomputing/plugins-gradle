@@ -37,6 +37,7 @@ class LoadProjectTask extends DefaultTask {
 			def projectClassInstance = clazz.newInstance()
 			project.moabSdk.pluginProject.projectClassInstance = projectClassInstance
 			project.moabSdk.pluginProject.title = getPluginProperty(projectClassInstance, "title") ?: project.name
+			project.moabSdk.pluginProject.description = getPluginProperty(projectClassInstance, "description")
 			project.moabSdk.pluginProject.author = getPluginProperty(projectClassInstance, "author")
 			project.version = projectClassInstance.getVersion()
 		} catch(Exception e) {
