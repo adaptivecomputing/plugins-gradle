@@ -8,6 +8,7 @@ import org.gradle.api.*
 public class MWSProjectInitPlugin implements Plugin<Project> {
 	void apply(Project project) {
 		project.repositories.mavenCentral()
+		project.repositories.mavenRepo(url:"https://oss.sonatype.org/content/groups/public")
 
 		project.plugins.apply MWSProjectPlugin
 		project.plugins.apply com.adaptc.gradle.fatjar.FatJarPlugin
