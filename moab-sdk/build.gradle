@@ -8,7 +8,10 @@ dependencies {
 	runtime 'commons-collections:commons-collections:3.2.1'
 	runtime 'commons-beanutils:commons-beanutils:1.8.3'
 	runtime 'net.sf.ezmorph:ezmorph:1.0.6'
-	compile project(":lib-dir")
-	compile project(":fat-jar")
-	compile project(":cobertura-master")
+	compile 'com.adaptc.gradle:lib-dir:0.1'
+	compile 'com.adaptc.gradle:fat-jar:0.1'
+	compile 'com.adaptc.gradle:cobertura-master:0.1'
+//	compile project(":lib-dir")
+//	compile project(":fat-jar")
+//	compile project(":cobertura-master")
 }
