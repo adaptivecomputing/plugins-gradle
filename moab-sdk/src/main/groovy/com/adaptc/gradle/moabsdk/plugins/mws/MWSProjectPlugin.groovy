@@ -4,6 +4,7 @@ import org.gradle.api.*
 
 import com.adaptc.gradle.moabsdk.tasks.ConfigureMavenDeploymentTask
 import com.adaptc.gradle.moabsdk.extensions.*
+import com.adaptc.gradle.moabsdk.utils.MoabSdkUtils
 
 /**
  * @author bsaville
@@ -45,9 +46,11 @@ public class MWSProjectPlugin implements Plugin<Project> {
 			deployerJars "org.apache.maven.wagon:wagon-http:${project.moabSdk.maven.httpJarVersion}"
 		}
 
-		// Add task
-		def configMaven = project.tasks.add("configureMavenDeployment", ConfigureMavenDeploymentTask)
-		project.tasks.compileJava.dependsOn configMaven
-		configMaven.dependsOn project.tasks.loadPluginProject
+		// Add task if not disabled
+		if (!MoabSdkUtils.getProperty(project, "sdk.disableMavenDefaults")) {
+			def configMaven = project.tasks.add("configureMavenDeployment", ConfigureMavenDeploymentTask)
+			project.tasks.compileJava.dependsOn configMaven
+			configMaven.dependsOn project.tasks.loadPluginProject
+		}
 	}
 }
