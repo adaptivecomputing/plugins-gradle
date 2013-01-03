@@ -59,7 +59,7 @@ subprojects { proj ->
 	}
 
 	signing {
-		required { proj.version.contains("-SNAPSHOT") }
+		required { !proj.version.contains("-SNAPSHOT") }
 		sign configurations.archives
 	}
 
