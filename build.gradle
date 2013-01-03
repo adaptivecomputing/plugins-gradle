@@ -58,28 +58,23 @@ subprojects { proj ->
 		archives javadocJar
 	}
 
-	def isSnapshot = proj.version.contains("-SNAPSHOT")
-
 	signing {
-		if (!isSnapshot)
-			sign configurations.archives
+		required { proj.version.contains("-SNAPSHOT") }
+		sign configurations.archives
 	}
 
 	uploadArchives {
-		def repo = "oss-" + (isSnapshot ? "snapshots" : "releases")
-		def repoUrl = rootProject."${repo}.url"
-		def username = rootProject."${repo}.username"
-		def password = rootProject."${repo}.password"
-
 		repositories.mavenDeployer {
-			if (!isSnapshot) {
-				beforeDeployment { deployment -> signing.signPom(deployment) }
-			}
+			beforeDeployment { deployment -> signing.signPom(deployment) }
 
 			configuration = configurations.deployerJars
-			repository(url:repoUrl) {
-				authentication(userName:username, password:password)
+			repository(url:rootProject."oss-releases.url") {
+				authentication(userName:rootProject."oss-releases.username", password:rootProject."oss-releases.password")
 			}
+			snapshotRepository(url:rootProject."oss-snapshots.url") {
+				authentication(userName:rootProject."oss-snapshots.username", password:rootProject."oss-snapshots.password")
+			}
+
 
 			pom {
 				project {
