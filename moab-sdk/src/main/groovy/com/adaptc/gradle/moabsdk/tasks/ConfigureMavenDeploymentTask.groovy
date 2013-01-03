@@ -18,7 +18,7 @@ public class ConfigureMavenDeploymentTask extends DefaultTask {
 	void configureMavenDeployment(Project proj) {
 		logger.info "Configuring Maven deployment for version ${proj.version}"
 
-		proj.group = MoabSdkUtils.getProperty(proj, "projects.groupId")
+		proj.group = MoabSdkUtils.getProperty(proj, "projects.groupId") ?: proj.group
 		proj.uploadArchives {
 			repositories.mavenDeployer {
 				configuration = proj.configurations.deployerJars
