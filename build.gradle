@@ -75,7 +75,6 @@ subprojects { proj ->
 				authentication(userName:rootProject."oss-snapshots.username", password:rootProject."oss-snapshots.password")
 			}
 
-
 			pom {
 				project {
 					name proj.projectName

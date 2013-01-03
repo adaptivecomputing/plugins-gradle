@@ -20,16 +20,15 @@ public class ConfigureMavenDeploymentTask extends DefaultTask {
 
 		proj.group = MoabSdkUtils.getProperty(proj, "projects.groupId")
 		proj.uploadArchives {
-			def repo = proj.version.contains("-SNAPSHOT") ? "snapshots" : "releases"
-			def repoUrl = MoabSdkUtils.getProperty(proj, "${repo}.url")
-			def username = MoabSdkUtils.getProperty(proj, "${repo}.username")
-			def password = MoabSdkUtils.getProperty(proj, "${repo}.password")
-
 			repositories.mavenDeployer {
 				configuration = proj.configurations.deployerJars
-				repository(url:repoUrl) {
-					if (username)
-						authentication(userName:username, password:password)
+				repository(url:rootProject."releases.url") {
+					if (rootProject.hasProperty("releases.username"))
+						authentication(userName:rootProject."releases.username", password:rootProject."releases.password")
+				}
+				snapshotRepository(url:rootProject."snapshots.url") {
+					if (rootProject.hasProperty("snapshots.username"))
+						authentication(userName:rootProject."snapshots.username", password:rootProject."snapshots.password")
 				}
 
 				pom {
