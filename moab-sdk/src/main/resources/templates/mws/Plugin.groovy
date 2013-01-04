@@ -1,5 +1,7 @@
 <%=packageName ? 'package '+packageName : '' %>
 
+import com.adaptc.mws.plugins.*
+
 class <%=className%> extends AbstractPlugin {
 	static constraints = {
 		// You can insert constraints here on pollInterval or any arbitrary field in
