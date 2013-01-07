@@ -42,6 +42,7 @@ public class MWSProjectInitPlugin implements Plugin<Project> {
 				"aopalliance",
 				"not-yet-commons-ssl",
 				"xml-apis",
+				"http-builder",
 		]
 	}
 }
