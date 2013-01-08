@@ -43,6 +43,7 @@ public class MWSProjectInitPlugin implements Plugin<Project> {
 				"not-yet-commons-ssl",
 				"xml-apis",
 				"http-builder",
+				"joda-time",
 		]
 	}
 }
