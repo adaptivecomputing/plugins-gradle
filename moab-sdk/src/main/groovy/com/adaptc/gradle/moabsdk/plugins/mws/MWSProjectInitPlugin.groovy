@@ -36,6 +36,7 @@ public class MWSProjectInitPlugin implements Plugin<Project> {
 				"ezmorph",
 				"commons-logging",
 				"commons-beanutils",
+				"commons-codec",
 				"commons-collections",
 				"commons-lang",
 				"json-lib",
@@ -44,6 +45,11 @@ public class MWSProjectInitPlugin implements Plugin<Project> {
 				"xml-apis",
 				"http-builder",
 				"joda-time",
+				"httpclient",
+				"httpcore",
+				"nekohtml",
+				"xercesImpl",
+				"xml-resolver",
 		]
 	}
 }
