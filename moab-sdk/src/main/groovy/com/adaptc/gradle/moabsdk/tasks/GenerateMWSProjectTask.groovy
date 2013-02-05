@@ -82,6 +82,7 @@ public class GenerateMWSProjectTask extends DefaultTask {
 					className:className,
 					naturalName:className.replaceAll(/([a-z])([A-Z])/, "\$1 \$2"),
 					projectName:projectName,
+					commonsVersion:MoabSdkUtils.getProperty(project, 'commons.version') ?: '',
 					mwsVersion:MoabSdkUtils.getProperty(project, 'mws.version') ?: '',
 					license:MoabSdkUtils.getProperty(project, 'projects.license') ?: '',
 					author:MoabSdkUtils.getProperty(project, 'projects.author.name') ?: '',

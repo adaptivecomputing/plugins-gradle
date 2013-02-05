@@ -22,7 +22,7 @@ public class MWSProjectBasePlugin implements Plugin<Project> {
 
 		project.dependencies.add("groovy", project.dependencies.localGroovy())
 		Dependency commonsDependency = project.dependencies.create("com.adaptc.mws:plugins-commons:" +
-				MoabSdkUtils.getProperty(project, 'version.sdk', project.rootProject.getProperty('version.sdk'))) {
+				MoabSdkUtils.getProperty(project, 'commons.version', project.rootProject.getProperty('commons.version'))) {
 			exclude module:"groovy"
 			exclude module:"groovy-all"
 		}

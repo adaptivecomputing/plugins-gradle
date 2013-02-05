@@ -1,6 +1,5 @@
-// Place any plugin instances you would like to create when using 'generate-test-instances' or
-//	'upload-test' (which combines 'upload' with 'generate-test-instances') in here using the 
-//	following format
+// Place any plugin instances you would like to create when using 'generateTestInstances'
+// in here using the following format
 /*
 plugins {
 	myPluginId {

@@ -10,6 +10,7 @@ class <%=className%>Project {
 	// Versioning properties
 	String version = "0.1"
 	String mwsVersion = "<%=mwsVersion%> > *"
+	String commonsVersion = "<%=commonsVersion%> > *"
 	String license = "<%=license%>"
 	
 	// Documentation properties
