@@ -13,7 +13,7 @@ public class MWSProjectTestingBasePlugin implements Plugin<Project> {
 				"com.adaptc.mws:plugins-testing:${MoabSdkUtils.getProperty(project, 'commons.version', DEFAULT_SDK_VERSION)}"
 		))
 		project.dependencies.add("testCompile", project.dependencies.create("xom:xom:1.2.5"))
-		project.dependencies.add("testCompile", project.dependencies.create("org.spockframework:spock-core:0.6-groovy-1.8"))
+		project.dependencies.add("testCompile", project.dependencies.create("org.spockframework:spock-core:0.7-groovy-1.8"))
 		project.dependencies.add("testCompile", project.dependencies.create("org.hamcrest:hamcrest-core:1.2"))
 		// allows mocking of classes (in addition to interfaces)
 		project.dependencies.add("testRuntime", project.dependencies.create("cglib:cglib-nodep:2.2"))
