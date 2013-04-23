@@ -22,8 +22,9 @@ public class NexusStagingReleaseTask extends DefaultTask {
 		URL urlObj = url.toURL()
 		def baseUrl = urlObj.getProtocol()+"://"+urlObj.getAuthority()+"/"
 		def listStagingUrl = baseUrl + "service/local/staging/profile_repositories"
-		def closeStagingUrl = baseUrl +	"service/local/staging/bulk/close"
-		def promoteStagingUrl = baseUrl +	"service/local/staging/bulk/promote"
+		def closeStagingUrl = baseUrl + "service/local/staging/bulk/close"
+		def promoteStagingUrl = baseUrl + "service/local/staging/bulk/promote"
+		def dropStagingUrl = baseUrl + "service/local/staging/bulk/drop"
 		logger.lifecycle("Determining all open repositories")
 		logger.debug("Using username ${username} and URL ${baseUrl}")
 
@@ -89,6 +90,28 @@ public class NexusStagingReleaseTask extends DefaultTask {
 			} else {
 				try { logger.info("Content: "+conn.content) } catch(Exception e) {}
 				throw new Exception("There was an error while promoting the repositories: ${conn.responseCode} ${conn.responseMessage}")
+			}
+
+			logger.lifecycle("Dropping ${repositoryIds.size()} released repositories")
+			logger.debug("Repository IDs: ${repositoryIds}")
+
+			conn = dropStagingUrl.toURL().openConnection()
+			conn.setRequestMethod("POST")
+			conn.setRequestProperty("Authorization", "Basic ${authString}")
+			conn.setRequestProperty("Accept", "application/json")
+			conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8")
+			conn.setDoOutput( true )
+
+			wr = new OutputStreamWriter(conn.outputStream)
+			wr.write("{'data':{'stagedRepositoryIds':[${repositoryIds.collect { "'"+it+"'" }.join(",")}],'description':''}}");
+			wr.flush()
+			wr.close()
+			conn.connect()
+			if(conn.responseCode == 201){
+				logger.lifecycle "${repositoryIds.size()} repositories dropped"
+			} else {
+				try { logger.info("Content: "+conn.content) } catch(Exception e) {}
+				throw new Exception("There was an error while dropping the repositories: ${conn.responseCode} ${conn.responseMessage}")
 			}
 		} else {
 			logger.lifecycle "No closed repositories to promote (release)"
