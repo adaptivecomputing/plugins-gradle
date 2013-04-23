@@ -47,36 +47,36 @@ public class MWSProjectBasePlugin implements Plugin<Project> {
 		project.tasks['compileJava'].dependsOn loadPluginProject
 
 		// Test Template Generation Tasks
-		def createPluginTest = project.tasks.add(name:"createPluginTest", type:GenerateArtifactTestTask) {
+		def createPluginTest = project.tasks.add("createPluginTest", GenerateArtifactTestTask) {
 			artifactName = "Plugin"
 		}
 		createPluginTest.setGroup(MOAB_SDK_TASK_GROUP)
 		createPluginTest.setDescription("Generates a test for the given plugin package and class name")
-		def createTranslatorTest = project.tasks.add(name:"createTranslatorTest", type:GenerateArtifactTestTask) {
+		def createTranslatorTest = project.tasks.add("createTranslatorTest", GenerateArtifactTestTask) {
 			artifactName = "Translator"
 		}
 		createTranslatorTest.setGroup(MOAB_SDK_TASK_GROUP)
 		createTranslatorTest.setDescription("Generates a test for the given translator package and class name")
-		def createComponentTest = project.tasks.add(name:"createComponentTest", type:GenerateArtifactTestTask) {
+		def createComponentTest = project.tasks.add("createComponentTest", GenerateArtifactTestTask) {
 			artifactName = "Component"
 		}
 		createComponentTest.setGroup(MOAB_SDK_TASK_GROUP)
 		createComponentTest.setDescription("Generates a test for the given helper component package and class name")
 
 		// Artifact Template Generation Tasks
-		def createPlugin = project.tasks.add(name:"createPlugin", type:GenerateArtifactTask) {
+		def createPlugin = project.tasks.add("createPlugin", GenerateArtifactTask) {
 			artifactName = "Plugin"
 		}
 		createPlugin.dependsOn createPluginTest
 		createPlugin.setGroup(MOAB_SDK_TASK_GROUP)
 		createPlugin.setDescription("Generates a plugin file with the given package and class name")
-		def createTranslator = project.tasks.add(name:"createTranslator", type:GenerateArtifactTask) {
+		def createTranslator = project.tasks.add("createTranslator", GenerateArtifactTask) {
 			artifactName = "Translator"
 		}
 		createTranslator.dependsOn createTranslatorTest
 		createTranslator.setGroup(MOAB_SDK_TASK_GROUP)
 		createTranslator.setDescription("Generates a translator file with the given package and class name")
-		def createComponent = project.tasks.add(name:"createComponent", type:GenerateArtifactTask) {
+		def createComponent = project.tasks.add("createComponent", GenerateArtifactTask) {
 			artifactName = "Component"
 		}
 		createComponent.dependsOn createComponentTest
