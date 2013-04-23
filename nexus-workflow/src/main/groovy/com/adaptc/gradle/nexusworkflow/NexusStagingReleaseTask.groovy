@@ -31,7 +31,7 @@ public class NexusStagingReleaseTask extends DefaultTask {
 		// First list all repositories and retrieve all open ones
 		def repositoryList = getAllRepositories(listStagingUrl, authString)
 		def repositoryIds = repositoryList.findAll{
-			it.type=="open"
+			it.type=="open" && it.userId==username
 		}.collect { it.repositoryId }
 
 		if (repositoryIds) {
@@ -66,7 +66,7 @@ public class NexusStagingReleaseTask extends DefaultTask {
 		// List all repositories again and retrieve all closed ones
 		repositoryList = getAllRepositories(listStagingUrl, authString)
 		repositoryIds = repositoryList.findAll{
-			it.type=="closed"
+			it.type=="closed" && it.userId==username
 		}.collect { it.repositoryId }
 
 		if (repositoryIds) {

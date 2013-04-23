@@ -32,6 +32,10 @@ class NexusStagingListTask extends DefaultTask {
 			def profiles = new JsonSlurper().parseText( conn.content.text )
 			logger.lifecycle "---------------"
 			profiles.data.each {
+				if (it.userId!=username) {
+					logger.debug("Ignoring repository ${it.repositoryId} because user ID is ${it.userId} and does not match ${username}")
+					return
+				}
 				logger.lifecycle "Repository ID: ${it.repositoryId}, Status: ${it.type}"
 			}
 			logger.lifecycle "---------------"
