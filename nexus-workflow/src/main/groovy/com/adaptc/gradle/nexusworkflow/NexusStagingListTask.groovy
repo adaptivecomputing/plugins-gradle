@@ -30,13 +30,14 @@ class NexusStagingListTask extends DefaultTask {
 
 		if(conn.responseCode == 200){
 			def profiles = new JsonSlurper().parseText( conn.content.text )
-			logger.lifecycle "---Repositories---"
+			logger.lifecycle "Repositories:"
 			profiles.data.each {
-				println "Repository ID: ${it.repositoryId}, Status: ${it.type}"
+				logger.lifecycle "Repository ID: ${it.repositoryId}, Status: ${it.type}"
 			}
+			logger.lifecycle "---------------"
 		} else {
-			logger.error "Something bad happened."
-			logger.error "${conn.responseCode}: ${conn.responseMessage}"
+			try { logger.info("Content: "+conn.content) } catch(Exception e) {}
+			throw new Exception("There was an error while listing the repositories: ${conn.responseCode} ${conn.responseMessage}")
 		}
 	}
 }

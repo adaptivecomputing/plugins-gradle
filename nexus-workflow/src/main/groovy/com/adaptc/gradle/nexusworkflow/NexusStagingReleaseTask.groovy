@@ -33,26 +33,30 @@ public class NexusStagingReleaseTask extends DefaultTask {
 			it.type=="open"
 		}.collect { it.repositoryId }
 
-		logger.lifecycle("Closing ${repositoryIds.size()} open repositories")
-		logger.debug("Repository IDs: ${repositoryIds}")
+		if (repositoryIds) {
+			logger.lifecycle("Closing ${repositoryIds.size()} open repositories")
+			logger.debug("Repository IDs: ${repositoryIds}")
 
-		def conn = closeStagingUrl.toURL().openConnection()
-		conn.setRequestMethod("POST")
-		conn.setRequestProperty("Authorization", "Basic ${authString}")
-		conn.setRequestProperty("Accept", "application/json")
-		conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8")
-		conn.setDoOutput( true )
+			def conn = closeStagingUrl.toURL().openConnection()
+			conn.setRequestMethod("POST")
+			conn.setRequestProperty("Authorization", "Basic ${authString}")
+			conn.setRequestProperty("Accept", "application/json")
+			conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8")
+			conn.setDoOutput( true )
 
-		Writer wr = new OutputStreamWriter(conn.outputStream)
-		wr.write("{'data':{'stagedRepositoryIds':[${repositoryIds.collect { "'"+it+"'" }.join(",")}],'description':''}}");
-		wr.flush()
-		wr.close()
-		conn.connect()
-		if(conn.responseCode == 201){
-			logger.lifecycle "${repositoryIds.size()} repositories closed"
+			Writer wr = new OutputStreamWriter(conn.outputStream)
+			wr.write("{'data':{'stagedRepositoryIds':[${repositoryIds.collect { "'"+it+"'" }.join(",")}],'description':''}}");
+			wr.flush()
+			wr.close()
+			conn.connect()
+			if(conn.responseCode == 201){
+				logger.lifecycle "${repositoryIds.size()} repositories closed"
+			} else {
+				try { logger.info("Content: "+conn.content) } catch(Exception e) {}
+				throw new Exception("There was an error while closing the repositories: ${conn.responseCode} ${conn.responseMessage}")
+			}
 		} else {
-			try { logger.info("Content: "+conn.content) } catch(Exception e) {}
-			throw new Exception("There was an error while closing the repositories: ${conn.responseCode} ${conn.responseMessage}")
+			logger.lifecycle "No open repositories to close"
 		}
 
 		// List all repositories again and retrieve all closed ones
@@ -61,26 +65,30 @@ public class NexusStagingReleaseTask extends DefaultTask {
 			it.type=="closed"
 		}.collect { it.repositoryId }
 
-		logger.lifecycle("Promoting (releasing) ${repositoryIds.size()} closed repositories")
-		logger.debug("Repository IDs: ${repositoryIds}")
+		if (repositoryIds) {
+			logger.lifecycle("Promoting (releasing) ${repositoryIds.size()} closed repositories")
+			logger.debug("Repository IDs: ${repositoryIds}")
 
-		conn = promoteStagingUrl.toURL().openConnection()
-		conn.setRequestMethod("POST")
-		conn.setRequestProperty("Authorization", "Basic ${authString}")
-		conn.setRequestProperty("Accept", "application/json")
-		conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8")
-		conn.setDoOutput( true )
+			def conn = promoteStagingUrl.toURL().openConnection()
+			conn.setRequestMethod("POST")
+			conn.setRequestProperty("Authorization", "Basic ${authString}")
+			conn.setRequestProperty("Accept", "application/json")
+			conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8")
+			conn.setDoOutput( true )
 
-		wr = new OutputStreamWriter(conn.outputStream)
-		wr.write("{'data':{'stagedRepositoryIds':[${repositoryIds.collect { "'"+it+"'" }.join(",")}],'description':''}}");
-		wr.flush()
-		wr.close()
-		conn.connect()
-		if(conn.responseCode == 201){
-			logger.lifecycle "${repositoryIds.size()} repositories promoted"
+			Writer wr = new OutputStreamWriter(conn.outputStream)
+			wr.write("{'data':{'stagedRepositoryIds':[${repositoryIds.collect { "'"+it+"'" }.join(",")}],'description':''}}");
+			wr.flush()
+			wr.close()
+			conn.connect()
+			if(conn.responseCode == 201){
+				logger.lifecycle "${repositoryIds.size()} repositories promoted"
+			} else {
+				try { logger.info("Content: "+conn.content) } catch(Exception e) {}
+				throw new Exception("There was an error while promoting the repositories: ${conn.responseCode} ${conn.responseMessage}")
+			}
 		} else {
-			try { logger.info("Content: "+conn.content) } catch(Exception e) {}
-			throw new Exception("There was an error while promoting the repositories: ${conn.responseCode} ${conn.responseMessage}")
+			logger.lifecycle "No closed repositories to promote (release)"
 		}
 	}
 
