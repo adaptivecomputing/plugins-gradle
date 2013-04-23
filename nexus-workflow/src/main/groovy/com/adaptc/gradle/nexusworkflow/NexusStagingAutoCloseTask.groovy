@@ -2,15 +2,16 @@ package com.adaptc.gradle.nexusworkflow
 
 import groovy.json.JsonSlurper
 import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction;
 
 /**
  * @author bsaville
  */
 public class NexusStagingAutoCloseTask extends DefaultTask {
-	def url
-	def username
-	def password
+	@Input def url
+	@Input def username
+	@Input def password
 
 	@TaskAction
 	def close() {
