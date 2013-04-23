@@ -2,19 +2,22 @@ package com.adaptc.gradle.nexusworkflow
 
 import groovy.json.JsonSlurper
 import org.gradle.api.DefaultTask
-import org.gradle.api.tasks.Input
+import org.gradle.api.InvalidUserDataException
 import org.gradle.api.tasks.TaskAction;
 
 /**
  * @author bsaville
  */
 public class NexusStagingAutoCloseTask extends DefaultTask {
-	@Input def url
-	@Input def username
-	@Input def password
+	def url
+	def username
+	def password
 
 	@TaskAction
 	def close() {
+		if (!url || !username || !password)
+			throw new InvalidUserDataException("The oss-releases.url, oss-releases.username, and oss-releases.password "+
+					"properties must be set on the project before this task is run")
 		def authString = "${username}:${password}".getBytes().encodeBase64().toString()
 		def listStagingURL = url + "service/local/staging/profile_repositories"
 		def closeStagingUrl = url +	"service/local/staging/bulk/close"

@@ -1,22 +1,24 @@
 package com.adaptc.gradle.nexusworkflow
 
 import org.gradle.api.DefaultTask
-import org.gradle.api.tasks.Input
+import org.gradle.api.InvalidUserDataException
 import org.gradle.api.tasks.TaskAction;
 
 /**
  * @author bsaville
  */
 public class NexusStagingCloseTask extends DefaultTask {
-	@Input def url
-	@Input def username
-	@Input def password
+	def url
+	def username
+	def password
 
 	@TaskAction
 	def close() {
+		if (!url || !username || !password)
+			throw new InvalidUserDataException("The oss-releases.url, oss-releases.username, and oss-releases.password "+
+					"properties must be set on the project before this task is run")
 		if (!project.hasProperty("repoId")) {
-			logger.error("Please set the property 'repoId' in order to close a Nexus staging repository")
-			return
+			throw new InvalidUserDataException("Please set the property 'repoId' in order to close a Nexus staging repository")
 		}
 		def repoId = project.getProperties().repoId
 		logger.info("Closing repository '${repoId}'")

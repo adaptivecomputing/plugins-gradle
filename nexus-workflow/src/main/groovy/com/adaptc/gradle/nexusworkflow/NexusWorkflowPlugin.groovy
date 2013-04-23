@@ -21,9 +21,9 @@ public class NexusWorkflowPlugin implements Plugin<Project> {
 
 		// Add tasks and mapping
 		NexusStagingCloseTask stagingCloseTask = project.tasks.add("nexusStagingClose", NexusStagingCloseTask)
-		stagingCloseTask.url = getProperty(project, "oss-releases.url")
-		stagingCloseTask.username = getProperty(project, "oss-releases.username")
-		stagingCloseTask.password = getProperty(project, "oss-releases.password")
+		stagingCloseTask.url = getProjectProperty(project, "oss-releases.url")
+		stagingCloseTask.username = getProjectProperty(project, "oss-releases.username")
+		stagingCloseTask.password = getProjectProperty(project, "oss-releases.password")
 //		stagingCloseTask.conventionMapping.map("url") { nexusWorkflowExtension.url }
 //		stagingCloseTask.conventionMapping.map("username") { nexusWorkflowExtension.username }
 //		stagingCloseTask.conventionMapping.map("password") { nexusWorkflowExtension.password }
@@ -34,9 +34,9 @@ public class NexusWorkflowPlugin implements Plugin<Project> {
 //		stagingListTask.conventionMapping.map("url") { nexusWorkflowExtension.url }
 //		stagingListTask.conventionMapping.map("username") { nexusWorkflowExtension.username }
 //		stagingListTask.conventionMapping.map("password") { nexusWorkflowExtension.password }
-		stagingListTask.url = getProperty(project, "oss-releases.url")
-		stagingListTask.username = getProperty(project, "oss-releases.username")
-		stagingListTask.password = getProperty(project, "oss-releases.password")
+		stagingListTask.url = getProjectProperty(project, "oss-releases.url")
+		stagingListTask.username = getProjectProperty(project, "oss-releases.username")
+		stagingListTask.password = getProjectProperty(project, "oss-releases.password")
 		stagingListTask.setGroup(NEXUS_WORKFLOW_TASK_GROUP)
 		stagingListTask.setDescription("Lists all Nexus staging repositories whether open or closed")
 
@@ -44,14 +44,14 @@ public class NexusWorkflowPlugin implements Plugin<Project> {
 //		stagingAutoCloseTask.conventionMapping.map("url") { nexusWorkflowExtension.url }
 //		stagingAutoCloseTask.conventionMapping.map("username") { nexusWorkflowExtension.username }
 //		stagingAutoCloseTask.conventionMapping.map("password") { nexusWorkflowExtension.password }
-		stagingAutoCloseTask.url = getProperty(project, "oss-releases.url")
-		stagingAutoCloseTask.username = getProperty(project, "oss-releases.username")
-		stagingAutoCloseTask.password = getProperty(project, "oss-releases.password")
+		stagingAutoCloseTask.url = getProjectProperty(project, "oss-releases.url")
+		stagingAutoCloseTask.username = getProjectProperty(project, "oss-releases.username")
+		stagingAutoCloseTask.password = getProjectProperty(project, "oss-releases.password")
 		stagingAutoCloseTask.setGroup(NEXUS_WORKFLOW_TASK_GROUP)
 		stagingAutoCloseTask.setDescription("Closes all open Nexus staging repositories")
 	}
 
-	private def getProperty(Project project, String propertyName, defaultValue=null) {
+	private def getProjectProperty(Project project, String propertyName, defaultValue=null) {
 		if (project.hasProperty(propertyName))
 			return project."${propertyName}" ?: defaultValue
 		return defaultValue

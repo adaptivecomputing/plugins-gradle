@@ -2,7 +2,7 @@ package com.adaptc.gradle.nexusworkflow
 
 import groovy.json.JsonSlurper
 import org.gradle.api.DefaultTask
-import org.gradle.api.tasks.Input
+import org.gradle.api.InvalidUserDataException
 import org.gradle.api.tasks.TaskAction
 
 /**
@@ -10,12 +10,15 @@ import org.gradle.api.tasks.TaskAction
  * @author bsaville
  */
 class NexusStagingListTask extends DefaultTask {
-	@Input def url
-	@Input def username
-	@Input def password
+	def url
+	def username
+	def password
 
 	@TaskAction
 	def list() {
+		if (!url || !username || !password)
+			throw new InvalidUserDataException("The oss-releases.url, oss-releases.username, and oss-releases.password "+
+					"properties must be set on the project before this task is run")
 		def listStagingURL = url + "service/local/staging/profile_repositories"
 		def authString = "${username}:${password}".getBytes().encodeBase64().toString()
 		def conn = listStagingURL.toURL().openConnection()
