@@ -9,6 +9,8 @@ import org.gradle.api.plugins.MavenPlugin
 // Based on work from
 // 	http://www.sonatype.com/people/2012/07/nexus-pro-automating-staging-workflow-with-gradle-using-the-nexus-rest-apis/
 public class NexusWorkflowPlugin implements Plugin<Project> {
+	private static final String NEXUS_WORKFLOW_TASK_GROUP = "Upload"
+
 	void apply(Project project) {
 		// Apply plugins
 		project.plugins.apply(MavenPlugin)
@@ -22,14 +24,20 @@ public class NexusWorkflowPlugin implements Plugin<Project> {
 		stagingCloseTask.conventionMapping.map("url") { nexusWorkflowExtension.url }
 		stagingCloseTask.conventionMapping.map("username") { nexusWorkflowExtension.username }
 		stagingCloseTask.conventionMapping.map("password") { nexusWorkflowExtension.password }
+		stagingCloseTask.setGroup(NEXUS_WORKFLOW_TASK_GROUP)
+		stagingCloseTask.setDescription("Closes a single Nexus staging repository")
 		NexusStagingListTask stagingListTask = project.tasks.add("nexusStagingList", NexusStagingListTask)
 		stagingListTask.conventionMapping.map("url") { nexusWorkflowExtension.url }
 		stagingListTask.conventionMapping.map("username") { nexusWorkflowExtension.username }
 		stagingListTask.conventionMapping.map("password") { nexusWorkflowExtension.password }
+		stagingListTask.setGroup(NEXUS_WORKFLOW_TASK_GROUP)
+		stagingListTask.setDescription("Lists all Nexus staging repositories whether open or closed")
 		NexusStagingAutoCloseTask stagingAutoCloseTask = project.tasks.add("nexusStagingAutoClose", NexusStagingAutoCloseTask)
 		stagingAutoCloseTask.conventionMapping.map("url") { nexusWorkflowExtension.url }
 		stagingAutoCloseTask.conventionMapping.map("username") { nexusWorkflowExtension.username }
 		stagingAutoCloseTask.conventionMapping.map("password") { nexusWorkflowExtension.password }
+		stagingAutoCloseTask.setGroup(NEXUS_WORKFLOW_TASK_GROUP)
+		stagingAutoCloseTask.setDescription("Closes all open Nexus staging repositories")
 	}
 }
 
