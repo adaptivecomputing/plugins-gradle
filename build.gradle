@@ -1,4 +1,14 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath 'com.adaptc.gradle:nexus-workflow:0.4'
+	}
+}
+
 apply plugin:'idea'
+apply plugin:com.adaptc.gradle.nexusworkflow.NexusWorkflowPlugin
 
 subprojects { proj ->
 	group = "com.adaptc.gradle"
