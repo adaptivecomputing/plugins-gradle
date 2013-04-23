@@ -7,7 +7,7 @@ import org.gradle.api.tasks.TaskAction;
 /**
  * @author bsaville
  */
-public class NexusStagingCloseTask extends DefaultTask {
+public class NexusStagingPromoteTask extends DefaultTask {
 	def url
 	def username
 	def password
@@ -23,8 +23,8 @@ public class NexusStagingCloseTask extends DefaultTask {
 		def repoId = project.getProperties().repoId
 		URL urlObj = url.toURL()
 		def baseUrl = urlObj.getProtocol()+"://"+urlObj.getAuthority()+"/"
-		def closeStagingUrl = baseUrl +	"service/local/staging/bulk/close"
-		logger.info("Closing staging repository ${repoId} with ${closeStagingUrl} using ${username}")
+		def closeStagingUrl = baseUrl +	"service/local/staging/bulk/promote"
+		logger.info("Promoting staging repository ${repoId} with ${closeStagingUrl} using ${username}")
 		def authString = "${username}:${password}".getBytes().encodeBase64().toString()
 
 		def conn = closeStagingUrl.toURL().openConnection()
@@ -42,7 +42,7 @@ public class NexusStagingCloseTask extends DefaultTask {
 		conn.connect()
 
 		if(conn.responseCode == 201){
-			logger.lifecycle "Repository ${repoId} closed"
+			logger.lifecycle "Repository ${repoId} promoted"
 		} else {
 			try { logger.info("Content: "+conn.content) } catch(Exception e) {}
 			throw new Exception("There was an error while promoting the repository '${repoId}': ${conn.responseCode} ${conn.responseMessage}")
