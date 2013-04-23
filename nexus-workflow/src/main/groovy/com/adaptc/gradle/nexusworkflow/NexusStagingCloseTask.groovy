@@ -22,6 +22,8 @@ public class NexusStagingCloseTask extends DefaultTask {
 		}
 		def repoId = project.getProperties().repoId
 		logger.info("Closing repository '${repoId}'")
+		if (!url.endsWith("/"))
+			url += "/"
 		def closeStagingUrl = url +	"service/local/staging/bulk/close"
 		logger.info("Closing staging repositories with ${closeStagingUrl} using ${username}")
 		def authString = "${username}:${password}".getBytes().encodeBase64().toString()

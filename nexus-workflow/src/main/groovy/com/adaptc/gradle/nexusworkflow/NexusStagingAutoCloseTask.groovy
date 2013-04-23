@@ -19,12 +19,14 @@ public class NexusStagingAutoCloseTask extends DefaultTask {
 			throw new InvalidUserDataException("The oss-releases.url, oss-releases.username, and oss-releases.password "+
 					"properties must be set on the project before this task is run")
 		def authString = "${username}:${password}".getBytes().encodeBase64().toString()
-		def listStagingURL = url + "service/local/staging/profile_repositories"
+		if (!url.endsWith("/"))
+			url += "/"
+		def listStagingUrl = url + "service/local/staging/profile_repositories"
 		def closeStagingUrl = url +	"service/local/staging/bulk/close"
-		logger.info("Auto closing staging repositories with ${listStagingURL} and ${closeStagingUrl} using ${username}")
+		logger.info("Auto closing staging repositories with ${listStagingUrl} and ${closeStagingUrl} using ${username}")
 
 		// First list all repositories
-		def conn = listStagingURL.toURL().openConnection()
+		def conn = listStagingUrl.toURL().openConnection()
 		conn.setRequestProperty("Authorization", "Basic ${authString}")
 		conn.setRequestProperty("Accept", "application/json")
 
