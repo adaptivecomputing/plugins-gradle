@@ -38,7 +38,7 @@ public class NexusStagingAutoCloseTask extends DefaultTask {
 		def profiles = new JsonSlurper().parseText( conn.content.text )
 		def repositoryIds = profiles.data.findAll{
 			it.type=="open"
-		}
+		}.collect { it.repositoryId }
 		logger.info("Closing ${repositoryIds.size()} repositories: ${repositoryIds}")
 
 		conn = closeStagingUrl.toURL().openConnection()
