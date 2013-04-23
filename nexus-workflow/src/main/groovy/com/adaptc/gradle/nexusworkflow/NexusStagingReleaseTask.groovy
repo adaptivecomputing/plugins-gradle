@@ -55,6 +55,9 @@ public class NexusStagingReleaseTask extends DefaultTask {
 				try { logger.info("Content: "+conn.content) } catch(Exception e) {}
 				throw new Exception("There was an error while closing the repositories: ${conn.responseCode} ${conn.responseMessage}")
 			}
+
+			logger.lifecycle "Waiting 30 seconds until the closing is done"
+			sleep(30000)
 		} else {
 			logger.lifecycle "No open repositories to close"
 		}
