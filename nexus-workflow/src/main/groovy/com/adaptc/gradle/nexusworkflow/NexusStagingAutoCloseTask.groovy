@@ -21,6 +21,7 @@ public class NexusStagingAutoCloseTask extends DefaultTask {
 		def authString = "${username}:${password}".getBytes().encodeBase64().toString()
 		def listStagingURL = url + "service/local/staging/profile_repositories"
 		def closeStagingUrl = url +	"service/local/staging/bulk/close"
+		logger.info("Auto closing staging repositories with ${listStagingURL} and ${closeStagingUrl} using ${username}")
 
 		// First list all repositories
 		def conn = listStagingURL.toURL().openConnection()

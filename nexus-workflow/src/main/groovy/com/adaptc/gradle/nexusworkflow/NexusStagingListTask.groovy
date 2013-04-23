@@ -20,6 +20,7 @@ class NexusStagingListTask extends DefaultTask {
 			throw new InvalidUserDataException("The oss-releases.url, oss-releases.username, and oss-releases.password "+
 					"properties must be set on the project before this task is run")
 		def listStagingURL = url + "service/local/staging/profile_repositories"
+		logger.info("Listing staging repositories at ${listStagingURL} using ${username}")
 		def authString = "${username}:${password}".getBytes().encodeBase64().toString()
 		def conn = listStagingURL.toURL().openConnection()
 		conn.setRequestProperty("Authorization", "Basic ${authString}")
