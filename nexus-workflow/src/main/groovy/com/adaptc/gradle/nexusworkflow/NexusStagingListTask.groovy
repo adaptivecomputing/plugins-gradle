@@ -30,7 +30,7 @@ class NexusStagingListTask extends DefaultTask {
 
 		if(conn.responseCode == 200){
 			def profiles = new JsonSlurper().parseText( conn.content.text )
-			logger.lifecycle "Repositories:"
+			logger.lifecycle "---------------"
 			profiles.data.each {
 				logger.lifecycle "Repository ID: ${it.repositoryId}, Status: ${it.type}"
 			}
