@@ -29,6 +29,11 @@ public class MWSProjectBasePlugin implements Plugin<Project> {
 		project.dependencies.add("compile", commonsDependency)
 
 		addTasks(project)
+
+		// TODO Have this updated on changes to readme without a clean
+		project.tasks.jar.doFirst {
+			from 'README.md'
+		}
 	}
 
 	void addTasks(Project project) {

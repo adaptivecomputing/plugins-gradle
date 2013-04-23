@@ -19,8 +19,8 @@ public class UploadProjectTask extends DefaultTask {
 		if (!mwsBaseUrl.endsWith("/"))
 			mwsBaseUrl += "/"
 		def mwsPath = "rest/plugin-types"
-		def username = MoabSdkUtils.getProperty(project, "mws.username", "admin").toString()
-		def password = MoabSdkUtils.getProperty(project, "mws.password", "adminpw").toString()
+		def username = MoabSdkUtils.getProperty(project, "mws.username", "moab-admin").toString()
+		def password = MoabSdkUtils.getProperty(project, "mws.password", "changeme!").toString()
 
 		def mwsUri = (mwsBaseUrl+mwsPath).toURI()
 		def baseUrl = mwsUri.scheme+"://"+mwsUri.authority
