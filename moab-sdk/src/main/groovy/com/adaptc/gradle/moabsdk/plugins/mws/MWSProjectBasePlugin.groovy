@@ -1,5 +1,6 @@
 package com.adaptc.gradle.moabsdk.plugins.mws
 
+import groovy.io.FileType
 import org.gradle.api.*
 
 import org.gradle.api.tasks.bundling.Jar
@@ -30,9 +31,8 @@ public class MWSProjectBasePlugin implements Plugin<Project> {
 
 		addTasks(project)
 
-		// TODO Have this updated on changes to readme without a clean
-		project.tasks.jar.doFirst {
-			from 'README.md'
+		project.tasks.jar {
+			from(".") { include "README*.md" }
 		}
 	}
 
