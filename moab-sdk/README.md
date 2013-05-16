@@ -77,9 +77,9 @@ createMwsProject | Root project | args | `./gradlew createMwsProject -Pargs=<PRO
 createPlugin | Subproject | args | `./gradlew createPlugin -Pargs=<PLUGINNAME>` | Creates the directory structure for `PLUGINNAME` (including sub-folders for a full package reference such as com.ace.mws.plugins.ExamplePlugin) in src/main/groovy and creates a simple, valid plugin type.
 createTranslator | Subproject | args | `./gradlew createTranslator -Pargs=<TRANSLATORNAME>` | Creates the directory structure and file for the `TRANSLATORNAME`, just as it does for "createPlugin".
 createComponent | Subproject | args | `./gradlew createComponent -Pargs=<COMPONENTNAME>` | Creates the directory structure and file for the `COMPONENTNAME`, just as it does for "createPlugin". The annotations are also added to the class (and comments to automatically inject other components).
-upload | \- | `./gradlew upload` | Uploads the specified plugin project(s) as a JAR file (with POST /rest/plugin-types) to the MWS instance pointed to by the settings in the `gradle.properties` file. See the `gradle.properties` bullet point below for more details.
-generateTestInstances | \- | `./gradlew generateTestInstances` | Creates plugin instances (with POST /rest/plugins) for each instance defined in the project's `instances.groovy` file. See the `instances.groovy` bullet point below for more details.
-test | \- | `./gradlew test` | Runs the Spock and JUnit tests for the project located in src/test/groovy and src/test/java. See "Testing" below for more details.
+upload | Subproject | \- | `./gradlew upload` | Uploads the specified plugin project(s) as a JAR file (with POST /rest/plugin-types) to the MWS instance pointed to by the settings in the `gradle.properties` file. See the `gradle.properties` bullet point below for more details.
+generateTestInstances | Subproject | \- | `./gradlew generateTestInstances` | Creates plugin instances (with POST /rest/plugins) for each instance defined in the project's `instances.groovy` file. See the `instances.groovy` bullet point below for more details.
+test | Subproject | \- | `./gradlew test` | Runs the Spock and JUnit tests for the project located in src/test/groovy and src/test/java. See "Testing" below for more details.
 
 ## Configuration Files
 
