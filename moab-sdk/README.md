@@ -1,11 +1,11 @@
-This is a [Gradle|http://gradle.org] plugin for creating and maintaining Moab plugin projects.  Currently this only includes creating
+This is a [Gradle](http://gradle.org) plugin for creating and maintaining Moab plugin projects.  Currently this only includes creating
 MWS plugin projects and artifacts, but may include more in the future.
 
 # Introduction to the Moab SDK
 
 The Moab SDK (which the moab-sdk Gradle plugin enables) is utilized internally by
-[Adaptive Computing|http://adaptivecomputing.com] and in the open source plugin project
-[plugins-mws|http://github.com/adaptivecomputing/plugins-mws].  This may be referred to as an example of how to
+[Adaptive Computing](http://adaptivecomputing.com) and in the open source plugin project
+[plugins-mws](http://github.com/adaptivecomputing/plugins-mws).  This may be referred to as an example of how to
 organize and build plugins for Moab Web Services.
 
 * Gradle is a build system based on Groovy, just as Grails is a web framework based on Spring and Groovy
@@ -109,14 +109,14 @@ by each user in their respective `~/.gradle/` directory.
 > `generateTestInstances` task to create instances that may be used in testing with specific configuration. The
 > initial plugins configuration, however, is used to create plugin instances that are meant to be always present in
 > production use cases. See the
-> [native plugin project file |https://github.com/adaptivecomputing/plugins-mws/blob/master/native/NativeProject.groovy]
+> [native plugin project file](https://github.com/adaptivecomputing/plugins-mws/blob/master/native/NativeProject.groovy)
 > for an example of how this works.
 
 ## Testing
 
 The MWS project Gradle plugin automatically creates a Spock test file for every plugin created with `createPlugin`,
 every translator created with `createTranslator`, and every component created with `createComponent`. Just as the
-Grails test annotation [TestFor|http://grails.org/doc/2.1.0/guide/testing.html], there is a
+Grails test annotation [TestFor](http://grails.org/doc/2.1.0/guide/testing.html), there is a
 `com.ace.mws.plugins.testing.TestFor` annotation that may be used on plugins and translators to mimic the log and
 other properties that are typically injected on plugins or other classes. The test files should be located in
 `PROJECTNAME/src/test/groovy`.
