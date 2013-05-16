@@ -56,13 +56,13 @@ builds on the root project.
 
 Class | Applies To | Description
 ----- | ---------- | -----------
-com.adaptc.gradle.moabsdk.plugins.MoabSdkPlugin | Root project | Adds functionality for creating MWS subprojects
-com.adaptc.gradle.moabsdk.plugins.MoabSdkInitPlugin | Root project | Adds common conventions, including repositories, and applies the MoabSdkPlugin
-com.adaptc.gradle.moabsdk.plugins.mws.MWSProjectBasePlugin | Subproject | Configures the project as a java/groovy project, adds tasks for creating MWS plugin project artifacts and adds MWS plugin project dependencies
-com.adaptc.gradle.moabsdk.plugins.mws.MWSProjectTestingBasePlugin | Subproject | Adds the dependencies necessary for testing MWS plugin projects
-com.adaptc.gradle.moabsdk.plugins.mws.MWSProjectTestingPlugin | Subproject | Adds some common conventions for MWS plugin project testing and applies the MWSProjectTestingBasePlugin
-com.adaptc.gradle.moabsdk.plugins.mws.MWSProjectPlugin | Subproject | Adds some common conventions for MWS plugin projects and applies the MWSProjectBasePlugin and MWSProjectTestingPlugin
-com.adaptc.gradle.moabsdk.plugins.mws.MWSProjectInitPlugin | Subproject | Adds common conventions for MWS plugin projects, including repositories, and applies the fat-jar, lib-dir, and MWSProjectPlugin plugins
+[MoabSdkPlugin](src/main/groovy/com/adaptc/gradle/moabsdk/plugins/MoabSdkPlugin.groovy) | Root project | Adds functionality for creating MWS subprojects
+[MoabSdkInitPlugin](src/main/groovy/com/adaptc/gradle/moabsdk/plugins/MoabSdkInitPlugin.groovy) | Root project | Adds common conventions, including repositories, and applies the MoabSdkPlugin
+[MWSProjectBasePlugin](src/main/groovy/com/adaptc/gradle/moabsdk/plugins/mws/MWSProjectBasePlugin.groovy) | Subproject | Configures the project as a java/groovy project, adds tasks for creating MWS plugin project artifacts and adds MWS plugin project dependencies
+[MWSProjectTestingBasePlugin](src/main/groovy/com/adaptc/gradle/moabsdk/plugins/mws/MWSProjectTestingBasePlugin.groovy) | Subproject | Adds the dependencies necessary for testing MWS plugin projects
+[MWSProjectTestingPlugin](src/main/groovy/com/adaptc/gradle/moabsdk/plugins/mws/MWSProjectTestingPlugin.groovy) | Subproject | Adds some common conventions for MWS plugin project testing and applies the MWSProjectTestingBasePlugin
+[MWSProjectPlugin](src/main/groovy/com/adaptc/gradle/moabsdk/plugins/mws/MWSProjectPlugin.groovy) | Subproject | Adds some common conventions for MWS plugin projects and applies the MWSProjectBasePlugin and MWSProjectTestingPlugin
+[MWSProjectInitPlugin](src/main/groovy/com/adaptc/gradle/moabsdk/plugins/mws/MWSProjectInitPlugin.groovy) | Subproject | Adds common conventions for MWS plugin projects, including repositories, and applies the fat-jar, lib-dir, and MWSProjectPlugin plugins
 
 # MWS Plugin Projects
 
@@ -71,15 +71,26 @@ com.adaptc.gradle.moabsdk.plugins.mws.MWSProjectInitPlugin | Subproject | Adds c
 The table below is a reference of all tasks available when using the MWS project Gradle plugin.  Again, the "Applies To"
 column tells whether the task is meant to be run on the root project or the subproject in a multi-project configuration.
 
-Task Name | Applies To | Properties | Example | Description
+Task Name | Applies To | Description
 --------- | ---------- | ---------- | ------- | -----------
-createMwsProject | Root project | args | `./gradlew createMwsProject -Pargs=<PROJECTNAME>` | Creates a directory called `PROJECTNAME` and creates some files in the directory to help understand some basic features of the SDK. For project names containing multiple words, use hypens for seperation (i.e. `./gradlew createMwsProject -Pargs=cool-project-name`).
-createPlugin | Subproject | args | `./gradlew createPlugin -Pargs=<PLUGINNAME>` | Creates the directory structure for `PLUGINNAME` (including sub-folders for a full package reference such as com.ace.mws.plugins.ExamplePlugin) in src/main/groovy and creates a simple, valid plugin type.
-createTranslator | Subproject | args | `./gradlew createTranslator -Pargs=<TRANSLATORNAME>` | Creates the directory structure and file for the `TRANSLATORNAME`, just as it does for "createPlugin".
-createComponent | Subproject | args | `./gradlew createComponent -Pargs=<COMPONENTNAME>` | Creates the directory structure and file for the `COMPONENTNAME`, just as it does for "createPlugin". The annotations are also added to the class (and comments to automatically inject other components).
-upload | Subproject | \- | `./gradlew upload` | Uploads the specified plugin project(s) as a JAR file (with POST /rest/plugin-types) to the MWS instance pointed to by the settings in the `gradle.properties` file. See the `gradle.properties` bullet point below for more details.
-generateTestInstances | Subproject | \- | `./gradlew generateTestInstances` | Creates plugin instances (with POST /rest/plugins) for each instance defined in the project's `instances.groovy` file. See the `instances.groovy` bullet point below for more details.
-test | Subproject | \- | `./gradlew test` | Runs the Spock and JUnit tests for the project located in src/test/groovy and src/test/java. See "Testing" below for more details.
+createMwsProject | Root project | Creates a directory called `PROJECTNAME` and creates some files in the directory to help understand some basic features of the SDK. For project names containing multiple words, use hypens for seperation (i.e. `./gradlew createMwsProject -Pargs=cool-project-name`).
+createPlugin | Subproject | Creates the directory structure for `PLUGINNAME` (including sub-folders for a full package reference such as com.ace.mws.plugins.ExamplePlugin) in src/main/groovy and creates a simple, valid plugin type.
+createTranslator | Subproject | Creates the directory structure and file for the `TRANSLATORNAME`, just as it does for "createPlugin".
+createComponent | Subproject | Creates the directory structure and file for the `COMPONENTNAME`, just as it does for "createPlugin". The annotations are also added to the class (and comments to automatically inject other components).
+upload | Subproject | Uploads the specified plugin project(s) as a JAR file (with POST /rest/plugin-types) to the MWS instance pointed to by the settings in the `gradle.properties` file. See the `gradle.properties` bullet point below for more details.
+generateTestInstances | Subproject | Creates plugin instances (with POST /rest/plugins) for each instance defined in the project's `instances.groovy` file. See the `instances.groovy` bullet point below for more details.
+test | Subproject | Runs the Spock and JUnit tests for the project located in src/test/groovy and src/test/java. See "Testing" below for more details.
+
+Examples:
+```
+./gradlew createMwsProject -Pargs=<PROJECTNAME>
+./gradlew createPlugin -Pargs=<PLUGINNAME>
+./gradlew createTranslator -Pargs=<TRANSLATORNAME>
+./gradlew createComponent -Pargs=<COMPONENTNAME>
+./gradlew upload
+./gradlew generateTestInstances
+./gradlew test
+```
 
 ## Configuration Files
 
