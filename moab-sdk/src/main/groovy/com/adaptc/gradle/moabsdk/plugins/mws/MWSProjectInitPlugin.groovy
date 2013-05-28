@@ -50,6 +50,7 @@ public class MWSProjectInitPlugin implements Plugin<Project> {
 				"nekohtml",
 				"xercesImpl",
 				"xml-resolver",
+				"unboundid",
 		]
 	}
 }
