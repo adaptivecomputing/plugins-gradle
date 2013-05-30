@@ -1,0 +1,17 @@
+contributor(context()) {
+	// Testing hints
+	classType.getAnnotations("com.adaptc.mws.plugins.testing.TestFor").each {
+		String className = it?.findAttributeValue("value")?.getClassNameText()
+		if (className.endsWith("Plugin")) {
+			property name:"plugin", type:className, doc:"The plugin under test"
+			delegatesTo(findClass("com.adaptc.mws.plugins.testing.PluginUnitTestMixin").getNavigationElement())
+		} else if (className.endsWith("Translator")) {
+			property name:"translator", type:className, doc:"The translator under test"
+			delegatesTo(findClass("com.adaptc.mws.plugins.testing.TranslatorUnitTestMixin").getNavigationElement())
+		} else {
+			// Assume component
+			property name:"component", type:className, doc:"The component under test"
+			delegatesTo(findClass("com.adaptc.mws.plugins.testing.ComponentUnitTestMixin").getNavigationElement())
+		}
+	}
+}
