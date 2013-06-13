@@ -92,6 +92,9 @@ public class NexusStagingReleaseTask extends DefaultTask {
 				throw new Exception("There was an error while promoting the repositories: ${conn.responseCode} ${conn.responseMessage}")
 			}
 
+			logger.lifecycle "Waiting 30 seconds until the promotion is done"
+			sleep(30000)
+
 			logger.lifecycle("Dropping ${repositoryIds.size()} released repositories")
 			logger.debug("Repository IDs: ${repositoryIds}")
 
