@@ -101,7 +101,7 @@ by each user in their respective `~/.gradle/` directory.
 * `build.gradle` - This file can be used to declare additional dependencies beyond plugins-commons and the others needed.  Custom tasks may also be defined here, although that should not be necessary.  The syntax for additional dependencies is documented in the example file created when using `createMwsProject`.
 * `instances.groovy` - This file can be used to declare test instances to be used in `generateTestInstances` as shown above.  The syntax is documented in the example created when using `createMwsProject`.
 * `PROJECTNAMEProject.groovy` - This file is named based on the project name (with an upper-case first letter) and the format is documented in the MWS plugin's documentation under Plugin Project and Metadata.  Default values are set for most properties, and an commented example is given of creating initial plugins.
-* `gradle.properties` - This file can be used to declare properties for the specific plugin, such as another version of the commons dependency (`version.sdk`) or the MWS URL and username/password properties, although these are more likely to go into the `~/.gradle/gradle.properties` file.
+* `gradle.properties` - This file can be used to declare properties for the specific plugin, such as another version of the commons dependency (`commons.version`) or the MWS URL and username/password properties, although these are more likely to go into the `~/.gradle/gradle.properties` file.
 * `~/.gradle/gradle.properties` - You can use this file to override any settings globally for your machine
 
 > While the `instances.groovy` file and the `initialPlugins` closure in the project file may seem to fulfill the same
