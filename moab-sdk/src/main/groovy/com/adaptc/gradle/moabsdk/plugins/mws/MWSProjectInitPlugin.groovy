@@ -51,6 +51,7 @@ public class MWSProjectInitPlugin implements Plugin<Project> {
 				"xercesImpl",
 				"xml-resolver",
 				"unboundid",
+				"mongo-java-driver",
 		]
 	}
 }
