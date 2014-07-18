@@ -19,15 +19,13 @@ public class UploadProjectTask extends DefaultTask {
 		if (!mwsBaseUrl.endsWith("/"))
 			mwsBaseUrl += "/"
 		def mwsPath = "rest/plugin-types"
-		def apiVersion = MoabSdkUtils.getProperty(project, "mws.apiVersion", "3").toString()
 		def username = MoabSdkUtils.getProperty(project, "mws.username", "moab-admin").toString()
 		def password = MoabSdkUtils.getProperty(project, "mws.password", "changeme!").toString()
 
 		def mwsUri = (mwsBaseUrl+mwsPath).toURI()
 		def baseUrl = mwsUri.scheme+"://"+mwsUri.authority
 		def path = mwsUri.path
-		logger.lifecycle "Uploading plugin project ${project.name} to ${baseUrl}${path} using API version ${apiVersion} "+
-				"and credentials ${username}:${password?.getAt(0)}..."
+		logger.lifecycle "Uploading plugin project ${project.name} to ${baseUrl}${path} using credentials ${username}:${password?.getAt(0)}..."
 		def http = new HTTPBuilder(baseUrl)
 		http.auth.basic(username, password)
 		try {
@@ -39,7 +37,7 @@ public class UploadProjectTask extends DefaultTask {
 
 			http.request(PUT, JSON) {
 				uri.path = path
-				uri.query = ['api-version':apiVersion,
+				uri.query = ['api-version':'latest',
 							 'jar-filename': (MoabSdkUtils.getProperty(project, "projects.artifactId.prefix") ?: '') +
 								(MoabSdkUtils.getProperty(project, "project.artifactId") ?: project.name)+".jar"]
 				requestContentType = "application/x-jar"
