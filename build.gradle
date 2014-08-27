@@ -31,6 +31,10 @@ subprojects { proj ->
 
 	repositories {
 		mavenCentral()
+		//TODO Remove snapshots URL
+		maven {
+			url "https://oss.sonatype.org/content/groups/public"
+		}
 	}
 
 	dependencies {
