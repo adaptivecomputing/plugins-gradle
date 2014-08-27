@@ -29,7 +29,7 @@ class CoberturaMasterExtension {
 
 	public CoberturaMasterMergeTask addMasterMergeTask(Project project, CoberturaPluginExtension coberturaExtension,
 				File outputSerFile) {
-		def masterMerge = project.tasks.add("coberturaMasterMergeMain", CoberturaMasterMergeTask)
+		def masterMerge = project.tasks.create("coberturaMasterMergeMain", CoberturaMasterMergeTask)
 		masterMerge.setGroup("Verification")
 		masterMerge.setDescription("Merges cobertura output from sub-projects for the 'main' source set")
 		masterMerge.coberturaClasspath = coberturaExtension.classpath
@@ -42,7 +42,7 @@ class CoberturaMasterExtension {
 
 	public CoberturaMasterReportTask addMasterReportTask(Project project, CoberturaPluginExtension coberturaExtension,
 				File inputSerFile) {
-		def masterReport = project.tasks.add("coberturaMasterReportMain", CoberturaMasterReportTask)
+		def masterReport = project.tasks.create("coberturaMasterReportMain", CoberturaMasterReportTask)
 		masterReport.setGroup("Verification")
 		masterReport.setDescription("Generates merged cobertura report from sub-projects for the 'main' source set")
 		masterReport.reportDir = project.extensions.getByType(ReportingExtension).file("cobertura")

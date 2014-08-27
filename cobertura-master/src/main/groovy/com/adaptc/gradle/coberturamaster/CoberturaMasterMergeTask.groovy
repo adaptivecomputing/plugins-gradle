@@ -1,6 +1,7 @@
 package com.adaptc.gradle.coberturamaster
 
 import org.gradle.api.*
+import org.gradle.api.internal.ConventionTask
 import org.gradle.api.tasks.*
 import org.gradle.api.file.FileCollection
 import org.gradle.api.internal.project.IsolatedAntBuilder
@@ -9,7 +10,7 @@ import org.gradle.api.internal.project.IsolatedAntBuilder
  * @author bsaville
  */
 
-class CoberturaMasterMergeTask extends DefaultTask {
+class CoberturaMasterMergeTask extends ConventionTask {
 	@OutputFile File outputSerFile
 	@InputFiles FileCollection coberturaClasspath
 	@Input List<String> excludedProjects = []

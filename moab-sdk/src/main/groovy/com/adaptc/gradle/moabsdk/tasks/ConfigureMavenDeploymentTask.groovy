@@ -15,28 +15,28 @@ public class ConfigureMavenDeploymentTask extends DefaultTask {
 		configureMavenDeployment(project)
 	}
 
-	void configureMavenDeployment(Project proj) {
-		logger.info "Configuring Maven deployment for version ${proj.version}"
+	void configureMavenDeployment(Project project) {
+		logger.info "Configuring Maven deployment for version ${project.version}"
 
-		proj.group = MoabSdkUtils.getProperty(proj, "projects.groupId") ?: proj.group
-		proj.uploadArchives {
+		project.group = MoabSdkUtils.getProperty(project, "projects.groupId") ?: project.group
+		project.uploadArchives {
 			repositories.mavenDeployer {
-				configuration = proj.configurations.deployerJars
-				repository(url:MoabSdkUtils.getProperty(proj, "releases.url")) {
-					if (MoabSdkUtils.getProperty(proj, "releases.username"))
-						authentication(userName:MoabSdkUtils.getProperty(proj, "releases.username"), 
-						password:MoabSdkUtils.getProperty(proj, "releases.password"))
+				configuration = project.configurations.deployerJars
+				repository(url:MoabSdkUtils.getProperty(project, "releases.url")) {
+					if (MoabSdkUtils.getProperty(project, "releases.username"))
+						authentication(userName:MoabSdkUtils.getProperty(project, "releases.username"),
+						password:MoabSdkUtils.getProperty(project, "releases.password"))
 				}
-				snapshotRepository(url:MoabSdkUtils.getProperty(proj, "snapshots.url")) {
-					if (MoabSdkUtils.getProperty(proj, "snapshots.username"))
-						authentication(userName:MoabSdkUtils.getProperty(proj, "snapshots.username"), 
-							password:MoabSdkUtils.getProperty(proj, "snapshots.password"))
+				snapshotRepository(url:MoabSdkUtils.getProperty(project, "snapshots.url")) {
+					if (MoabSdkUtils.getProperty(project, "snapshots.username"))
+						authentication(userName:MoabSdkUtils.getProperty(project, "snapshots.username"),
+							password:MoabSdkUtils.getProperty(project, "snapshots.password"))
 				}
 
 				pom {
 					project {
-						artifactId((MoabSdkUtils.getProperty(proj, "projects.artifactId.prefix") ?: '') +
-								(MoabSdkUtils.getProperty(proj, "project.artifactId") ?: proj.name))
+						artifactId((MoabSdkUtils.getProperty(project, "projects.artifactId.prefix") ?: '') +
+								(MoabSdkUtils.getProperty(project, "project.artifactId") ?: project.name))
 					}
 				}
 			}

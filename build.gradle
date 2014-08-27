@@ -2,13 +2,14 @@ buildscript {
 	repositories {
 		mavenCentral()
 	}
-	dependencies {
-		classpath 'com.adaptc.gradle:nexus-workflow:0.4'
-	}
+//	dependencies {
+//		classpath 'com.adaptc.gradle:nexus-workflow:0.4'
+//	}
 }
 
 apply plugin:'idea'
-apply plugin:com.adaptc.gradle.nexusworkflow.NexusWorkflowPlugin
+//TODO Uncomment
+//apply plugin:com.adaptc.gradle.nexusworkflow.NexusWorkflowPlugin
 
 subprojects { proj ->
 	group = "com.adaptc.gradle"
@@ -39,18 +40,20 @@ subprojects { proj ->
 			exclude module:"groovy-all"
 		}
 		compile gradleApi()
-		groovy localGroovy()
+		compile localGroovy()
 	}
 
 	sourceCompatibility = "1.6"
 	targetCompatibility = "1.6"
 
-	manifest.mainAttributes(
-			"Built-By": System.properties['user.name'],
-			"Created-By": System.properties['java.vm.version'] + " (" + System.properties['java.vm.vendor'] + ")",
-			"Implementation-Title": "Adaptive Computing Gradle Plugins - "+proj.archivesBaseName,
-			"Implementation-Version": proj.version,
-			"Implementation-Vendor": 'adaptivecomputing.com')
+	jar {
+		manifest.mainAttributes(
+				"Built-By": System.properties['user.name'],
+				"Created-By": System.properties['java.vm.version'] + " (" + System.properties['java.vm.vendor'] + ")",
+				"Implementation-Title": "Adaptive Computing Gradle Plugins - " + proj.archivesBaseName,
+				"Implementation-Version": proj.version,
+				"Implementation-Vendor": 'adaptivecomputing.com')
+	}
 
 	task sourcesJar(type: Jar) {
 		classifier = 'sources'
@@ -119,6 +122,6 @@ subprojects { proj ->
 }
 
 task wrapper(type: Wrapper) {
-	gradleVersion = '1.3'
+	gradleVersion = '2.0'
 	jarFile = 'wrapper/wrapper.jar'
 }

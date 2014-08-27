@@ -3,6 +3,7 @@ package com.adaptc.gradle.coberturamaster
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
 import org.gradle.api.file.FileCollection
+import org.gradle.api.internal.ConventionTask
 import org.gradle.api.internal.project.IsolatedAntBuilder
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.plugins.JavaPluginConvention
@@ -14,7 +15,7 @@ import org.gradle.api.plugins.GroovyPlugin
  * @author bsaville
  */
 
-class CoberturaMasterReportTask extends DefaultTask {
+class CoberturaMasterReportTask extends ConventionTask {
 	@Input String format
 	@OutputDirectory File reportDir
 	@InputFile File serFile

@@ -16,7 +16,7 @@ class GenerateTestInstancesTask extends DefaultTask {
 
 	@TaskAction void generateTestInstances() {
 		def instancesFile = getInstancesFile()
-		def config = new ConfigSlurper().parse(instancesFile.toURL())
+		def config = new ConfigSlurper().parse(instancesFile.toURI().toURL())
 		if (!config.plugins || !(config.plugins instanceof ConfigObject) || config.plugins.size()==0)
 			throw new InvalidUserDataException("Could not generate test plugin instances in MWS, please define the 'plugins' property in 'test-instances.groovy'")
 
