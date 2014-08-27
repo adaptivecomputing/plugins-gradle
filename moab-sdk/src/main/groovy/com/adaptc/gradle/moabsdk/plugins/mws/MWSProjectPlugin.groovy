@@ -48,7 +48,7 @@ public class MWSProjectPlugin implements Plugin<Project> {
 
 		// Add task if not disabled
 		if (!MoabSdkUtils.getProperty(project, "sdk.disableMavenDefaults")) {
-			def configMaven = project.tasks.add("configureMavenDeployment", ConfigureMavenDeploymentTask)
+			def configMaven = project.tasks.create("configureMavenDeployment", ConfigureMavenDeploymentTask)
 			project.tasks.compileJava.dependsOn configMaven
 			configMaven.dependsOn project.tasks.loadPluginProject
 		}

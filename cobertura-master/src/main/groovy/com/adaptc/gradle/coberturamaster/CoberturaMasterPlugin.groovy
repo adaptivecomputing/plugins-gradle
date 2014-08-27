@@ -17,7 +17,7 @@ public class CoberturaMasterPlugin implements Plugin<Project> {
 		// Create main source set if it does not already exist
 		if (!project.plugins.hasPlugin(JavaPlugin)) {
 			project.plugins.apply(JavaBasePlugin)
-			project.getConvention().getPlugin(JavaPluginConvention).sourceSets.add(SourceSet.MAIN_SOURCE_SET_NAME)
+			project.getConvention().getPlugin(JavaPluginConvention).sourceSets.create(SourceSet.MAIN_SOURCE_SET_NAME)
 		}
 
 		// Apply plugins
