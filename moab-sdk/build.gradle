@@ -11,5 +11,5 @@ dependencies {
 	// Use specific version numbers and not project references to keep them in sync without building on the same tag
 	compile 'com.adaptc.gradle:lib-dir:0.1'
 	compile 'com.adaptc.gradle:fat-jar:0.1'
-	compile 'com.adaptc.gradle:cobertura-master:0.2'
+	compile 'com.adaptc.gradle:cobertura-master:0.3-SNAPSHOT'
 }
