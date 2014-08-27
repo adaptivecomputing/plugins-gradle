@@ -39,7 +39,7 @@ subprojects { proj ->
 
 	dependencies {
 		deployerJars "org.apache.maven.wagon:wagon-http:1.0-beta-2"
-		testCompile ("org.spockframework:spock-core:0.7-groovy-1.8") {
+		testCompile ("org.spockframework:spock-core:0.7-groovy-2.0") {
 			exclude module:"groovy-all"
 		}
 		compile gradleApi()
