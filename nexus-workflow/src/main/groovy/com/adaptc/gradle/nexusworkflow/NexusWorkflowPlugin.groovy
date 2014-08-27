@@ -20,7 +20,7 @@ public class NexusWorkflowPlugin implements Plugin<Project> {
 //				NexusWorkflowExtension.NAME, NexusWorkflowExtension)
 
 		// Add tasks and mapping
-		NexusStagingListTask stagingListTask = project.tasks.add("nexusStagingList", NexusStagingListTask)
+		NexusStagingListTask stagingListTask = project.tasks.create("nexusStagingList", NexusStagingListTask)
 //		stagingListTask.conventionMapping.map("url") { nexusWorkflowExtension.url }
 //		stagingListTask.conventionMapping.map("username") { nexusWorkflowExtension.username }
 //		stagingListTask.conventionMapping.map("password") { nexusWorkflowExtension.password }
@@ -30,7 +30,7 @@ public class NexusWorkflowPlugin implements Plugin<Project> {
 		stagingListTask.setGroup(NEXUS_WORKFLOW_TASK_GROUP)
 		stagingListTask.setDescription("Lists all Nexus staging repositories whether open or closed")
 
-		NexusStagingCloseTask stagingCloseTask = project.tasks.add("nexusStagingClose", NexusStagingCloseTask)
+		NexusStagingCloseTask stagingCloseTask = project.tasks.create("nexusStagingClose", NexusStagingCloseTask)
 		stagingCloseTask.url = getProjectProperty(project, "oss-releases.url")
 		stagingCloseTask.username = getProjectProperty(project, "oss-releases.username")
 		stagingCloseTask.password = getProjectProperty(project, "oss-releases.password")
@@ -40,7 +40,7 @@ public class NexusWorkflowPlugin implements Plugin<Project> {
 		stagingCloseTask.setGroup(NEXUS_WORKFLOW_TASK_GROUP)
 		stagingCloseTask.setDescription("Closes a single Nexus staging repository")
 
-		NexusStagingPromoteTask stagingPromoteTask = project.tasks.add("nexusStagingPromote", NexusStagingPromoteTask)
+		NexusStagingPromoteTask stagingPromoteTask = project.tasks.create("nexusStagingPromote", NexusStagingPromoteTask)
 //		stagingPromoteTask.conventionMapping.map("url") { nexusWorkflowExtension.url }
 //		stagingPromoteTask.conventionMapping.map("username") { nexusWorkflowExtension.username }
 //		stagingPromoteTask.conventionMapping.map("password") { nexusWorkflowExtension.password }
@@ -50,7 +50,7 @@ public class NexusWorkflowPlugin implements Plugin<Project> {
 		stagingPromoteTask.setGroup(NEXUS_WORKFLOW_TASK_GROUP)
 		stagingPromoteTask.setDescription("Promotes (releases) a single Nexus staging repository after it has been closed")
 
-		NexusStagingReleaseTask stagingReleaseTask = project.tasks.add("nexusStagingRelease", NexusStagingReleaseTask)
+		NexusStagingReleaseTask stagingReleaseTask = project.tasks.create("nexusStagingRelease", NexusStagingReleaseTask)
 //		stagingReleaseTask.conventionMapping.map("url") { nexusWorkflowExtension.url }
 //		stagingReleaseTask.conventionMapping.map("username") { nexusWorkflowExtension.username }
 //		stagingReleaseTask.conventionMapping.map("password") { nexusWorkflowExtension.password }
