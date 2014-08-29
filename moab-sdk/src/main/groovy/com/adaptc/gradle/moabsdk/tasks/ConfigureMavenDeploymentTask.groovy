@@ -15,28 +15,28 @@ public class ConfigureMavenDeploymentTask extends DefaultTask {
 		configureMavenDeployment(project)
 	}
 
-	void configureMavenDeployment(Project project) {
-		logger.info "Configuring Maven deployment for version ${project.version}"
+	void configureMavenDeployment(Project projectParam) {
+		logger.info "Configuring Maven deployment for version ${projectParam.version}"
 
-		project.group = MoabSdkUtils.getProperty(project, "projects.groupId") ?: project.group
-		project.uploadArchives {
+		projectParam.group = MoabSdkUtils.getProperty(projectParam, "projects.groupId") ?: projectParam.group
+		projectParam.uploadArchives {
 			repositories.mavenDeployer {
-				configuration = project.configurations.deployerJars
-				repository(url:MoabSdkUtils.getProperty(project, "releases.url")) {
-					if (MoabSdkUtils.getProperty(project, "releases.username"))
-						authentication(userName:MoabSdkUtils.getProperty(project, "releases.username"),
-						password:MoabSdkUtils.getProperty(project, "releases.password"))
+				configuration = projectParam.configurations.deployerJars
+				repository(url:MoabSdkUtils.getProperty(projectParam, "releases.url")) {
+					if (MoabSdkUtils.getProperty(projectParam, "releases.username"))
+						authentication(userName:MoabSdkUtils.getProperty(projectParam, "releases.username"),
+						password:MoabSdkUtils.getProperty(projectParam, "releases.password"))
 				}
-				snapshotRepository(url:MoabSdkUtils.getProperty(project, "snapshots.url")) {
-					if (MoabSdkUtils.getProperty(project, "snapshots.username"))
-						authentication(userName:MoabSdkUtils.getProperty(project, "snapshots.username"),
-							password:MoabSdkUtils.getProperty(project, "snapshots.password"))
+				snapshotRepository(url:MoabSdkUtils.getProperty(projectParam, "snapshots.url")) {
+					if (MoabSdkUtils.getProperty(projectParam, "snapshots.username"))
+						authentication(userName:MoabSdkUtils.getProperty(projectParam, "snapshots.username"),
+							password:MoabSdkUtils.getProperty(projectParam, "snapshots.password"))
 				}
 
 				pom {
 					project {
-						artifactId((MoabSdkUtils.getProperty(project, "projects.artifactId.prefix") ?: '') +
-								(MoabSdkUtils.getProperty(project, "project.artifactId") ?: project.name))
+						artifactId((MoabSdkUtils.getProperty(projectParam, "projects.artifactId.prefix") ?: '') +
+								(MoabSdkUtils.getProperty(projectParam, "project.artifactId") ?: projectParam.name))
 					}
 				}
 			}
