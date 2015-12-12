@@ -48,6 +48,7 @@ class GenerateTestInstancesTask extends DefaultTask {
 			try {
 				http.request(POST, JSON) {
 					uri.path = path
+					uri.query = ['api-version':'latest']
 					body = """{"id":"${pluginId}","pluginType":"${pluginType}","config":{${serializedConfig}}"""+
 							(pollInterval?""","pollInterval":${pollInterval}""":"")+
 							(priority?""","priority":${priority}""":"")+
