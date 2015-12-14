@@ -78,7 +78,7 @@ createPlugin | Subproject | Creates the directory structure for `PLUGINNAME` (in
 createTranslator | Subproject | Creates the directory structure and file for the `TRANSLATORNAME`, just as it does for "createPlugin".
 createComponent | Subproject | Creates the directory structure and file for the `COMPONENTNAME`, just as it does for "createPlugin". The annotations are also added to the class (and comments to automatically inject other components).
 upload | Subproject | Uploads the specified plugin project(s) as a JAR file (with POST /rest/plugin-types) to the MWS instance pointed to by the settings in the `gradle.properties` file. See the `gradle.properties` bullet point below for more details.
-generateTestInstances | Subproject | Creates plugin instances (with POST /rest/plugins) for each instance defined in the project's `instances.groovy` file. See the `instances.groovy` bullet point below for more details.
+generateTestInstances | Subproject | Creates plugin instances (with POST /rest/plugins) for each instance defined in the project's `test-instances.groovy` file. See the `test-instances.groovy` bullet point below for more details.
 test | Subproject | Runs the Spock and JUnit tests for the project located in src/test/groovy and src/test/java. See "Testing" below for more details.
 
 Examples:
@@ -99,13 +99,13 @@ plugin project's sub-directory. The files at the root of the SDK should often no
 by each user in their respective `~/.gradle/` directory.
 
 * `build.gradle` - This file can be used to declare additional dependencies beyond plugins-commons and the others needed.  Custom tasks may also be defined here, although that should not be necessary.  The syntax for additional dependencies is documented in the example file created when using `createMwsProject`.
-* `instances.groovy` - This file can be used to declare test instances to be used in `generateTestInstances` as shown above.  The syntax is documented in the example created when using `createMwsProject`.
+* `test-instances.groovy` - This file can be used to declare test instances to be used in `generateTestInstances` as shown above.  The syntax is documented in the example created when using `createMwsProject`.
 * `PROJECTNAMEProject.groovy` - This file is named based on the project name (with an upper-case first letter) and the format is documented in the MWS plugin's documentation under Plugin Project and Metadata.  Default values are set for most properties, and an commented example is given of creating initial plugins.
 * `gradle.properties` - This file can be used to declare properties for the specific plugin, such as another version of the commons dependency (`commons.version`) or the MWS URL and username/password properties, although these are more likely to go into the `~/.gradle/gradle.properties` file.
 * `~/.gradle/gradle.properties` - You can use this file to override any settings globally for your machine
 
-> While the `instances.groovy` file and the `initialPlugins` closure in the project file may seem to fulfill the same
-> purpose, they are distinct. The `instances.groovy` file is used only when utilizing the SDK with the
+> While the `test-instances.groovy` file and the `initialPlugins` closure in the project file may seem to fulfill the same
+> purpose, they are distinct. The `test-instances.groovy` file is used only when utilizing the SDK with the
 > `generateTestInstances` task to create instances that may be used in testing with specific configuration. The
 > initial plugins configuration, however, is used to create plugin instances that are meant to be always present in
 > production use cases. See the

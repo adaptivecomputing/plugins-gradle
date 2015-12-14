@@ -96,7 +96,7 @@ public class MWSProjectBasePlugin implements Plugin<Project> {
 		uploadPluginProject.dependsOn(javadocJar)
 		uploadPluginProject.dependsOn(sourcesJar)
 		def genTestInstances = project.tasks.create("generateTestInstances", GenerateTestInstancesTask)
-		genTestInstances.setDescription("Generates test instances from instances.groovy and creates them in MWS")
+		genTestInstances.setDescription("Generates test instances from test-instances.groovy and creates them in MWS")
 		genTestInstances.setGroup(MOAB_SDK_TASK_GROUP)
 	}
 }
