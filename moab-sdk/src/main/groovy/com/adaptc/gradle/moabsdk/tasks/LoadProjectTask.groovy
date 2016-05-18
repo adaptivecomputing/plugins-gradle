@@ -1,8 +1,11 @@
 package com.adaptc.gradle.moabsdk.tasks
 
-import org.gradle.api.*
-import org.gradle.api.tasks.*
 import org.apache.commons.lang.StringUtils
+import org.codehaus.groovy.control.MultipleCompilationErrorsException
+import org.gradle.api.DefaultTask
+import org.gradle.api.InvalidUserDataException
+import org.gradle.api.tasks.InputFile
+import org.gradle.api.tasks.TaskAction
 
 /**
  * This task loads the project file for version information that can be used later.
@@ -30,7 +33,7 @@ class LoadProjectTask extends DefaultTask {
 			it.toURI().toURL() } as URL[])
 		try {
 			clazz = new GroovyClassLoader(loader).parseClass(new GroovyCodeSource(projectFile), false)
-		} catch(org.codehaus.groovy.control.MultipleCompilationErrorsException e) {
+		} catch(MultipleCompilationErrorsException e) {
 			throw new InvalidUserDataException("Could not build project '${project.name}', the project file (${projectFile}) is invalid: ${e.message}")
 		}
 		try {

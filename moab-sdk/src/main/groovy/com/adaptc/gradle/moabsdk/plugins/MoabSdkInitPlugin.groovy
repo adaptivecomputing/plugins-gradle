@@ -1,6 +1,8 @@
 package com.adaptc.gradle.moabsdk.plugins
 
-import org.gradle.api.*
+import org.gradle.api.JavaVersion
+import org.gradle.api.Plugin
+import org.gradle.api.Project
 
 /**
  * @author bsaville

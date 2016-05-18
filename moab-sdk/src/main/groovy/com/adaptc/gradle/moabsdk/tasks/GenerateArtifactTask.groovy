@@ -1,8 +1,11 @@
 package com.adaptc.gradle.moabsdk.tasks
 
-import org.gradle.api.*
-import org.gradle.api.tasks.*
-import static com.adaptc.gradle.moabsdk.utils.MoabSdkConstants.*
+import org.gradle.api.DefaultTask
+import org.gradle.api.InvalidUserDataException
+import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.TaskAction
+
+import static com.adaptc.gradle.moabsdk.utils.MoabSdkConstants.MWS_TEMPLATES_DIRECTORY
 
 /**
  * @author bsaville

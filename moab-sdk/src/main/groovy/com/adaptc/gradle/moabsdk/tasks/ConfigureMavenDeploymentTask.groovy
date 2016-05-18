@@ -1,8 +1,9 @@
 package com.adaptc.gradle.moabsdk.tasks
 
-import org.gradle.api.*
-import org.gradle.api.tasks.*
 import com.adaptc.gradle.moabsdk.utils.MoabSdkUtils
+import org.gradle.api.DefaultTask
+import org.gradle.api.Project
+import org.gradle.api.tasks.TaskAction
 
 /**
  * This task sets the maven deployment configuration for the given project.  This is done in a task

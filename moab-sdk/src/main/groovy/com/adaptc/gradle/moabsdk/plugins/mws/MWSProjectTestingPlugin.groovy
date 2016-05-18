@@ -1,6 +1,7 @@
 package com.adaptc.gradle.moabsdk.plugins.mws
 
-import org.gradle.api.*
+import org.gradle.api.Plugin
+import org.gradle.api.Project
 
 /**
  * @author bsaville

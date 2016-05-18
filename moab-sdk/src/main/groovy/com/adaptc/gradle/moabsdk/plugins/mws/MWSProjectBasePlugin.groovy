@@ -1,14 +1,15 @@
 package com.adaptc.gradle.moabsdk.plugins.mws
 
-import groovy.io.FileType
-import org.gradle.api.*
-
-import org.gradle.api.tasks.bundling.Jar
-import com.adaptc.gradle.moabsdk.extensions.*
+import com.adaptc.gradle.moabsdk.extensions.PluginProjectExtension
+import com.adaptc.gradle.moabsdk.extensions.SdkExtension
 import com.adaptc.gradle.moabsdk.tasks.*
 import com.adaptc.gradle.moabsdk.utils.MoabSdkUtils
-import static com.adaptc.gradle.moabsdk.utils.MoabSdkConstants.*
+import org.gradle.api.Plugin
+import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
+import org.gradle.api.tasks.bundling.Jar
+
+import static com.adaptc.gradle.moabsdk.utils.MoabSdkConstants.MOAB_SDK_TASK_GROUP
 
 /**
  * @author bsaville

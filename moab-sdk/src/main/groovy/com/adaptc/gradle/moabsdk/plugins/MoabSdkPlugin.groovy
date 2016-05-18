@@ -1,10 +1,13 @@
 package com.adaptc.gradle.moabsdk.plugins
 
-import org.gradle.api.*
-import static com.adaptc.gradle.moabsdk.utils.MoabSdkConstants.*
+import com.adaptc.gradle.moabsdk.plugins.mws.MWSProjectInitPlugin
 import com.adaptc.gradle.moabsdk.tasks.GenerateMWSProjectTask
 import com.adaptc.gradle.moabsdk.utils.MoabSdkUtils
-import com.adaptc.gradle.moabsdk.plugins.mws.MWSProjectInitPlugin
+import org.gradle.api.Plugin
+import org.gradle.api.Project
+
+import static com.adaptc.gradle.moabsdk.utils.MoabSdkConstants.MOAB_SDK_TASK_GROUP
+import static com.adaptc.gradle.moabsdk.utils.MoabSdkConstants.STANDALONE_PROJECT_PROPERTY
 
 /**
  * @author bsaville

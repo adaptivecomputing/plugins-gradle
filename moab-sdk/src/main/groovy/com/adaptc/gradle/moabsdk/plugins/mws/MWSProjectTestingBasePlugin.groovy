@@ -1,8 +1,10 @@
 package com.adaptc.gradle.moabsdk.plugins.mws
 
-import org.gradle.api.*
 import com.adaptc.gradle.moabsdk.utils.MoabSdkUtils
-import static com.adaptc.gradle.moabsdk.utils.MoabSdkConstants.*
+import org.gradle.api.Plugin
+import org.gradle.api.Project
+
+import static com.adaptc.gradle.moabsdk.utils.MoabSdkConstants.DEFAULT_SDK_VERSION
 
 /**
  * @author bsaville

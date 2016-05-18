@@ -1,6 +1,9 @@
 package com.adaptc.gradle.moabsdk.plugins.mws
 
-import org.gradle.api.*
+import com.adaptc.gradle.fatjar.FatJarPlugin
+import com.adaptc.gradle.libdir.LibDirDependenciesPlugin
+import org.gradle.api.Plugin
+import org.gradle.api.Project
 
 /**
  * @author bsaville
@@ -11,8 +14,8 @@ public class MWSProjectInitPlugin implements Plugin<Project> {
 		project.repositories.maven({ url "https://oss.sonatype.org/content/groups/public" })
 
 		project.plugins.apply MWSProjectPlugin
-		project.plugins.apply com.adaptc.gradle.fatjar.FatJarPlugin
-		project.plugins.apply com.adaptc.gradle.libdir.LibDirDependenciesPlugin
+		project.plugins.apply FatJarPlugin
+		project.plugins.apply LibDirDependenciesPlugin
 
 		configureFatJarExclusions(project)
 	}

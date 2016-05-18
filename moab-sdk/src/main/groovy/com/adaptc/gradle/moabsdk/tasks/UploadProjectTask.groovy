@@ -1,14 +1,15 @@
 package com.adaptc.gradle.moabsdk.tasks
 
-import org.gradle.api.*
-import org.gradle.api.tasks.*
 import com.adaptc.gradle.moabsdk.utils.MoabSdkUtils
-
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.HttpResponseException
-import static groovyx.net.http.Method.*
-import static groovyx.net.http.ContentType.JSON
 import org.apache.http.entity.FileEntity
+import org.gradle.api.DefaultTask
+import org.gradle.api.InvalidUserDataException
+import org.gradle.api.tasks.TaskAction
+
+import static groovyx.net.http.ContentType.JSON
+import static groovyx.net.http.Method.PUT
 
 /**
  * @author bsaville

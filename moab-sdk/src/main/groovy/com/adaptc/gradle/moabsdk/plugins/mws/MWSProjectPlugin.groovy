@@ -1,10 +1,10 @@
 package com.adaptc.gradle.moabsdk.plugins.mws
 
-import org.gradle.api.*
-
+import com.adaptc.gradle.moabsdk.extensions.SdkMavenExtension
 import com.adaptc.gradle.moabsdk.tasks.ConfigureMavenDeploymentTask
-import com.adaptc.gradle.moabsdk.extensions.*
 import com.adaptc.gradle.moabsdk.utils.MoabSdkUtils
+import org.gradle.api.Plugin
+import org.gradle.api.Project
 
 /**
  * @author bsaville

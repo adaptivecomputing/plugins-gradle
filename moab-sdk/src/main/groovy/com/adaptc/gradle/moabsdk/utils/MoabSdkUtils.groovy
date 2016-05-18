@@ -1,6 +1,6 @@
-package com.adaptc.gradle.moabsdk.utils;
+package com.adaptc.gradle.moabsdk.utils
 
-import org.gradle.api.*
+import org.gradle.api.Project
 
 /**
  * @author bsaville
