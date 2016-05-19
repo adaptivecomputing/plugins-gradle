@@ -33,7 +33,11 @@ public class MWSProjectBasePlugin implements Plugin<Project> {
 		addTasks(project)
 
 		project.tasks.jar {
-			from(".") { include "README*.md" }
+			dependsOn "processMarkdown"
+			from(".") {
+				include "README*.md"
+				include "README*.html"
+			}
 		}
 	}
 
@@ -105,6 +109,10 @@ public class MWSProjectBasePlugin implements Plugin<Project> {
 		def genTestInstances = project.tasks.create("generateTestInstances", GenerateTestInstancesTask)
 		genTestInstances.setDescription("Generates test instances from test-instances.groovy and creates them in MWS")
 		genTestInstances.setGroup(MOAB_SDK_TASK_GROUP)
+
+		def processMarkdown = project.tasks.create("processMarkdown", ProcessMarkdownTask)
+		processMarkdown.description = "Converts documentation from markdown to HTML using the pegdown library"
+		processMarkdown.group = MOAB_SDK_TASK_GROUP
+		processMarkdown.outputs.upToDateWhen { false }
 	}
 }
-
