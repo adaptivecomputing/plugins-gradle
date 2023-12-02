@@ -57,8 +57,8 @@ public class NexusStagingReleaseTask extends DefaultTask {
 				throw new Exception("There was an error while closing the repositories: ${conn.responseCode} ${conn.responseMessage}")
 			}
 
-			logger.lifecycle "Waiting 30 seconds until the closing is done"
-			sleep(30000)
+			logger.lifecycle "Waiting 60 seconds until the closing is done"
+			sleep(60000)
 		} else {
 			logger.lifecycle "No open repositories to close"
 		}
@@ -92,8 +92,8 @@ public class NexusStagingReleaseTask extends DefaultTask {
 				throw new Exception("There was an error while promoting the repositories: ${conn.responseCode} ${conn.responseMessage}")
 			}
 
-			logger.lifecycle "Waiting 30 seconds until the promotion is done"
-			sleep(30000)
+			logger.lifecycle "Waiting 60 seconds until the promotion is done"
+			sleep(60000)
 
 			logger.lifecycle("Dropping ${repositoryIds.size()} released repositories")
 			logger.debug("Repository IDs: ${repositoryIds}")
