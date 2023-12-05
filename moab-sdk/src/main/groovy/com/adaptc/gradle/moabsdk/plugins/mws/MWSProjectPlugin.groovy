@@ -24,8 +24,8 @@ public class MWSProjectPlugin implements Plugin<Project> {
 		project.artifacts.add("archives", project.tasks.javadocJar)
 
 		// Borrowed from grails core build
-		project.sourceCompatibility = "1.6"
-		project.targetCompatibility = "1.6"
+		project.sourceCompatibility = "1.8"
+		project.targetCompatibility = "1.8"
 
 		configureMavenDeployment(project)
 	}

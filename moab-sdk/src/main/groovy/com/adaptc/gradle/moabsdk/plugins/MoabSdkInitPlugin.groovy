@@ -13,8 +13,8 @@ public class MoabSdkInitPlugin implements Plugin<Project> {
 		project.repositories.maven({ url "https://oss.sonatype.org/content/groups/public" })
 
 		project.plugins.apply MoabSdkPlugin
-        project.ext.sourceCompatibility = JavaVersion.VERSION_1_6
-        project.ext.targetCompatibility = JavaVersion.VERSION_1_6
+        project.ext.sourceCompatibility = JavaVersion.VERSION_1_8
+        project.ext.targetCompatibility = JavaVersion.VERSION_1_8
 	}
 }
 
